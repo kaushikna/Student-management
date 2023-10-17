@@ -1,0 +1,11 @@
+.ist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.form-group input,.form-group select{
+    background-color: white;
+    font-size: 16px;
+}

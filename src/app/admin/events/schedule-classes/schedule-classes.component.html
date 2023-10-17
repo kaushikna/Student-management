@@ -1,0 +1,95 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+
+  <div class="d-flex justify-content-between">
+    <div class="form-group mt-2 px-1">
+      <div class="col-sm-12">
+        {{batch.batchName}} - {{batch.planName}}
+      </div>
+    </div>
+  </div>
+
+  <div class="p-3 border">
+    <div class="form-group row">
+      <label for="date" class="col-sm-5 col-form-label">Select Date <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-7">
+        <input type="date" [min]="getMinDate()" [max]="getMaxDate()" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.scheduleDate.invalid }" placeholder=""
+          formControlName="scheduleDate" />
+        <div *ngIf="submitted && f.scheduleDate.errors" class="invalid-feedback">
+          <div *ngIf="f.scheduleDate.errors.required">Date is required</div>
+        </div>
+        <div class="invalid-feedback" [style.display]="dateError? 'block':'none'">
+          {{dateErrorMessage}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date" class="col-sm-5 col-form-label">Time <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-7">
+        <div class="row">
+          <div class="col">
+            <input type="time" class="form-control" formControlName="fromTime" />
+            <div class="ist">
+              {{f.fromTime.value | ist | date:'hh:mm a'}} (IST)
+            </div>
+            <div class="invalid-feedback" [style.display]="submitted && f.fromTime.errors? 'block':'none'">
+              From Time is required
+            </div>
+          </div>
+          <div class="col">
+            <input type="time" class="form-control" formControlName="toTime"  />
+            <div class="ist">
+              {{f.toTime.value | ist | date:'hh:mm a'}}(IST)
+            </div>
+            <div class="invalid-feedback" [style.display]="submitted && f.toTime.errors ? 'block':'none'">
+              To Time is required
+            </div>
+          </div>
+        </div>
+        <div class="invalid-feedback" [style.display]="timeError? 'block':'none'">
+          {{timeErrorMessage}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date" class="col-sm-5 col-form-label">Meeting Url <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-7">
+        <div class="row">
+          <div class="col">
+            <input class="form-control" formControlName="meetingLink" type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="date" class="col-sm-5 col-form-label">Select Subject & Teacher <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-7">
+        <div class="row">
+          <div class="col">
+            <select class="form-control" formControlName="subject">
+              <option class="dropdown-content" *ngFor="let option of subjects" [value]="option._id"> {{ option.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col" *ngIf="teacherList.length">
+            <select class="form-control" formControlName="teacher">
+              <option class="dropdown-content" *ngFor="let option of teacherList" [value]="option._id"> {{
+                option.firstName }} {{
+                option.lastName }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end mb-2 mt-4">
+      <button class="btn btn-primary" style="width: 200px;">Schedule</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,106 @@
+<div class="content-wrapper test-paper-results-summary">
+    <div>
+        <div class="row mb-2">
+            <div class="col-md-2">
+                <h3 class="page-title">Test Papers</h3>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-2 pl-0" *ngIf="filterFlagObj['Types']">
+                        <select class="form-control form-control-sm" (change)="refreshData()"
+                            [(ngModel)]="testPaperQuery.type">
+                            <option *ngFor="let testPaperType of testPaperTypes" [value]="testPaperType.value">
+                                {{testPaperType.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 pl-0" *ngIf="filterFlagObj['Entities']">
+                        <select class="form-control form-control-sm" (change)="onExamTypeChange()" name="EntityType" [(ngModel)]="testPaperQuery.entityType">
+                          <option *ngFor="let option of entities" [value]="option.value">{{option.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <select class="form-control form-control-sm" placeholder="Select Subject" (change)="refreshData()"
+                            [(ngModel)]="testPaperQuery.subjectId">
+                            <option *ngFor="let subject of subjects" [value]="subject._id">{{subject.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 pl-0" *ngIf="filterFlagObj['Students']">
+                        <app-dropdown-search *ngIf="students && students.length" [selectedValue]="studentId"
+                            [filterLabel]="'Student'" [filterListener]="filterTrigger" [filterDisplayKey]="'firstName'"
+                            [filterValueKey]="'firstName'" [filterKey]="'Student'" [options]="students"
+                            (filterSelected)="applySelectedOption($event)" (filterClicked)="onFilterClicked($event)">
+                        </app-dropdown-search>
+                    </div>
+                    <div class="col-md-2 pl-0" *ngIf="filterFlagObj['Status']">
+                        <select class="form-control form-control-sm" (change)="refreshData()" [(ngModel)]="testPaperQuery.status">
+                            <option [value]="item.value" *ngFor="let item of statuses">{{item.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 pl-0">
+                        <input type="text" (input)="refreshData()" [(ngModel)]="testPaperQuery.search" class="form-control form-control-sm"
+                            placeholder="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mx-0">
+            <div class="col-md-8">
+                <div class="row mt-4"*ngIf="!loading">
+                    <div class="col-md-6" *ngFor="let testResult of testResults | paginate: paginationConfig">
+                        <div class="white-tile mhtp">
+                            <div class="row pb-2 white-tile-head">
+                                <div class="col-12">
+                                    <h4 class="text-truncate">{{testResult.name}}</h4>
+                                </div>
+                            </div>
+        
+                            <div *ngIf="!testResult.attempted" class="white-tile-body text-center">
+                                <button (click)="onStartExam(testResult)" type="button" class="btn btn-primary btn-lg btn-block">START EXAM</button>
+                            </div>
+        
+                            <div *ngIf="!testResult.attempted" class="white-tile-footer border-top pt-2 mb-0">
+                                <div class="row ft-12">
+                                    <div class="col-md-4"><strong>Duration:</strong>{{testResult.hours}} Min</div>
+                                    <div class="col-md-8 text-right"><strong>Total Questions:</strong>{{testResult.noOfQuestions}}</div>
+                                </div>
+                            </div>
+                            <div *ngIf="testResult.attempted" class="white-tile-body text-center">
+                                <p class="ft-24 font-weight-bold">{{testResult.totalMarksObtained}}/{{testResult.totalMarks}}</p>
+                                <div>{{testResult.attemptedDate | date:'dd-MM-yyyy'}}</div>
+                            </div>
+        
+                            <div *ngIf="testResult.attempted" class="white-tile-footer pt-2 mb-0">
+                                <div class="row ft-12">
+                                    <div class="col-md-12 d-flex justify-content-end text-right"><a routerLink="{{testResult._id}}" style="font-weight: 600;" class="text-primary">Detailed Score Report</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="row" *ngIf="testResults?.length">
+                    <pagination-controls id="paginationListId" class="my-pagination" (pageChange)="pageChange($event)">
+                    </pagination-controls>
+                </nav>
+            </div>
+            <div class="col-md-4 right-sec">
+                <img src="../../../assets/images/computer.png" alt="">
+                <div class="title">Get the finest out of Examprephub by
+                </div>
+                <ul>
+                    <li>Keep practicing to solve problems</li>
+                    <li>Be punctual with the preparation schedule</li>
+                    <li>Ask queries with expert teachers</li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <div class="loader" *ngIf="loading"></div>
+</div>
+
+
+
+
+

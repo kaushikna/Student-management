@@ -1,0 +1,29 @@
+.white-tile{
+    box-shadow: 0px 0px 14px -1px rgba(67, 67, 67, 0.35);
+    border: 0;
+    min-height: max-content;
+}
+.white-tile-head h4{
+    font-size: 18px;
+    font-weight: 600;
+}
+::ng-deep .rich-text hr{
+    display: none;
+}
+.white-tile-body .rich-text {
+    height: 23px;
+}
+::ng-deep #paginationListId .ngx-pagination li{
+    border-radius: 50px;
+}
+::ng-deep #paginationListId .ngx-pagination li.current{
+    background-color: #0880e8;
+}
+::ng-deep #paginationListId .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+input,select{
+    font-size: 16px;
+    appearance: auto;
+}

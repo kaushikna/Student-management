@@ -1,0 +1,81 @@
+<div>
+    <div class="part_one">
+        <div class="heading">
+            <h3 class="m-0"> Dashboard</h3>
+        </div>
+        <div class="select">
+            <div>
+                <div>
+                    <label for="" class="m-0 lable_theme">SALE TYPE</label>
+                </div>
+                <select class="form-select">
+                    <option selected>All</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div>
+                <div>
+                    <label for="" class="m-0 lable_theme">PAYMENT MODE</label>
+                </div>
+                <select class="form-select">
+                    <option selected>All</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class=" clearfix d-flex flex-wrap">
+            <div class=" list-items" *ngFor="let listItem of listItems" (click)="onClick(listItem)">
+                <div class="box m-2">
+                    <div class="info-box hover-expand-effect items-center">
+                        <div class="icon">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </div>
+                        <div class="content">
+                            <div class="number count-to">{{listItem.value}}</div>
+                            <div class="text">{{listItem.title}}</div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a class="btn btn-link btn_txt">{{listItem.routeTitle}} <i
+                                class="mdi mdi-chevron-double-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="  chart_two">
+                <div class=" chart_box">
+                    <app-area-chart></app-area-chart>
+                </div>
+
+                <div class=" chart_box">
+                    <app-bar-chart></app-bar-chart>
+                </div>
+
+            </div>
+            <div class=" chart_three">
+                <div class=" chart_box" id="chart">
+                    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                        [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                        [title]="chartOptions.title" [colors]="chartOptions.colors"></apx-chart>
+                </div>
+                <div class=" chart_box">
+                    <app-pie-chart></app-pie-chart>
+                </div>
+            </div>
+            <div class="chat_four">
+                <div class="chart_box">
+                    <app-line-bar-chart></app-line-bar-chart>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

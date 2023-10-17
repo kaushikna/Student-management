@@ -1,0 +1,29 @@
+<div class="dropdown" [class.active]="showFilter" (click)="onFilterClick($event)">
+    <div class="dropdown-selected" *ngIf="selectedObj && selectedObj[filterValueKey]">
+            {{selectedObj[filterValueKey]}}
+    </div>
+    <div class="dropdown-selected" *ngIf="!selectedObj || !selectedObj[filterValueKey]">
+            Select {{filterLabel}}
+    </div>
+    <div class="dropdown-icon">
+        <i class="fa fa-angle-down"></i>
+    </div>
+
+    <div class="dropdown-options-container" (click)="onSearchBarClick($event)">
+        <div class="dropdown-options-container-input">
+            <input #tdd type="text" [formControl]="formItem" autocomplete="off" />{{tdd.focus()}}
+            <div class="dropdown-options-container-input-icon">
+                <i *ngIf="!formItem.value" class="fa fa-search"></i>
+                <i *ngIf="formItem.value" (click)="onFilterClear()" class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="dropdown-options-container-list" [ngClass]="filterOptionsSize">
+            <div *ngIf="resetFilter && !!selectedValue" class="reset"
+                (click)="removeAppliedFilter()">Reset </div>
+            <div [class.selected]="option[filterValueKey] === selectedValue"
+                (click)="onFilterSelected($event,option)" *ngFor="let option of filteredOptions | async">
+                {{option[filterDisplayKey]}}
+            </div>
+        </div>
+    </div>
+</div>

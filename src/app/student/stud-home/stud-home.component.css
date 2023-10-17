@@ -1,0 +1,235 @@
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.content-wrapper{
+    padding: 0 !important;
+}
+.bg_img{
+    background-image: url(../../../assets/images/study.jpg);
+    width: 100%;
+    position: relative;
+    height: 430px;
+    background-size: cover;
+    object-fit: cover;
+}
+.bg_img::after{
+    content: '';
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.slider_theme{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    z-index: 21111;
+}
+
+
+.slider_detalis{
+    margin: auto;
+    width: 600px;
+    text-align: center;
+}
+@media(max-width:768px){
+    .slider_detalis{
+        width: 75% !important;
+    }
+}
+.carousel-control-prev{
+    top: 45px !important;
+}
+.carousel-control-next{
+    top: 60px !important;
+}
+
+/* cours */
+
+.cours{
+    padding: 120px 0px 110px 0px;
+    background-color: #f1f8ff;
+    height: auto;
+}
+.cours_content{
+    max-width: 1140px;
+    margin: auto;
+}
+.heading h3{
+    font-size: 32px;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #054a85;
+}
+.heading p{
+    font-size: 20px;
+    font-style: italic;
+}
+.cours_box{
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.box_main a h2{
+    color: #fff;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+.box_main a h2 p{
+    margin: 0;
+    
+}
+.bgact{
+    background-color: #2B4C9C !important;
+    display: block !important;
+    width: 350px;
+    height: 140px;
+    box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+    padding: 40px;
+    border-radius: 10px;
+}
+.bgsat{
+    background-color: #1D96C5 !important;
+    display: block !important;
+    width: 350px;
+    height: 140px;
+    color: #fff;
+    box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+    padding: 40px;
+    border-radius: 10px;
+}
+.bgpt{
+    color: #fff;
+    background-color: #B16340 !important;
+    display: block !important;
+    width: 350px;
+    height: 140px;
+    box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+    padding: 40px;
+    border-radius: 10px;
+}
+.slider_detalis h2{
+    font-size: 40px !important; 
+}
+@media(max-width:425px){
+    .bgact{
+        width: 250px;
+    }
+    .bgsat{
+        width: 250px;
+    }
+    .bgpt{
+        width: 250px;
+    }
+    .slider_detalis h2{
+        font-size: 20px !important;
+    }
+}
+
+/* Pricing */
+
+.pricing{
+    margin-top: 40px;
+    height: auto;
+    max-width: 1140px;
+    margin: auto;
+}
+.pricing_heading h3{
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #054a85;
+}
+.pring_text p{
+    font-size: 18px;
+    color: #444444;
+    font-style: italic;
+}
+.pricing .box {
+    padding: 20px;
+    background: #fff;
+    text-align: left;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 12%);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+.pricing .featured h3 {
+    color: #fff;
+    background: #0880e8;
+}
+.pricing h3 {
+    font-weight: 400;
+    margin: -20px -20px 20px -20px;
+    padding: 20px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #05579e;
+    background: #f8f8f8;
+}
+.card-body{
+    padding: 1.25rem;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.txt-yellow{
+    color: #f6b024;
+}
+.ft-big {
+    font-size: 40px;
+    font-weight: 600;
+    color: #f6b024;
+}
+.bxico {
+    font-size: 23px !important;
+    position: relative;
+    color: #0880e8;
+    top: 6px;
+    padding-right: 10px !important;
+}
+.pricing ul li {
+    padding-bottom: 10px;
+}
+.pricing ul {
+    padding: 0;
+    list-style: none;
+    color: #444444;
+    text-align: left;
+    line-height: 20px;
+    font-size: 13px;
+}
+.details-mh{
+    padding-bottom: 20px;
+}
+.enroll_btn{
+    margin-top: 16px;
+}
+.enroll_btn button{
+    padding: 7px 13px;
+    width: 142px;
+    height: 42px;
+    font-size: 18px !important;
+    border-radius: 4px;
+}
+.user-detail{
+    font-size: 20px;
+    color: #0880e8;
+    padding-right: 10px;
+}
+
+ .heading-two{
+    font-size: 23px;
+    font-weight: 600;
+    color: #f6b024 !important;
+}
+.carousel-item{
+    transition: all 2s ease-in-out;
+}

@@ -1,0 +1,157 @@
+
+
+<div class="content-wrapper px-3">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <h3 class="page-title">Trouble Tickets</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>TicketID</th>
+                            <th>Trouble Type</th>
+                            <th>Trouble Ticket Date</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ticketItem of model.data | paginate: paginationConfig">
+                            <td class="text-primary">{{ticketItem.ticketId}}</td>
+                            <td>{{ticketItem.requestType}}</td>
+                            <td>{{ticketItem.createdAt| date:'MM/dd/yyyy'}}</td>
+                            <td>{{ticketItem.priority}}</td>
+                            <td>{{ticketItem.status}}</td>
+                            <td>{{ticketItem.notes}}</td>
+                            <td>
+                                <button type="button" class="btn btn-link text-primary" (click)="onClickViewDetails(ticketItem)">ViewDetails</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls id="paginationListId" class="my-pagination"
+                    (pageChange)="pageChange($event)"></pagination-controls>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary btn-rounded btn-fw mb-3 mr-3 pull-right"
+                        (click)="addTroubleTicket()">+ Trouble Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="CreateTroubleTicket" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 500px">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+
+                <div class="modal-header bg-white">
+                    <h6 class="heading">Create Trouble Ticket</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3">
+
+                        <table cellpadding="5" cellspacing="5" width="100%">
+
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label text-left">Trouble Type
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <select class="form-control" formControlName="requestType" [ngClass]="{ 'is-invalid': submitted && f.requestType.errors }">
+                                        <option value="">Select Trouble Type</option>
+                                        <option *ngFor="let requestType of ticketRequestTypes" [ngValue]="requestType.value">
+                                            {{requestType.title}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.requestType.errors" class="invalid-feedback">
+                                        <div *ngIf="f.requestType.errors.required">Trouble Type is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label text-left">Priority
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <select class="form-control" formControlName="priority" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }">
+                                        <option value="">Select Priority</option>
+                                        <option *ngFor="let priority of ticketPriorities" [ngValue]="priority.value">
+                                            {{priority.title}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                                        <div *ngIf="f.priority.errors.required">Priority is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-5 col-form-label">Notes</label>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control" formControlName="notes" placeholder="Notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
+                                    <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
+                                        <div *ngIf="f.notes.errors.required">Notes is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary mr-3" type="button" (click)="close()">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="viewTroubleDetails" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 600px" *ngIf="ticket">
+            <div class="modal-header">
+                <h5 class="modal-title">Ticket ID {{ticket.ticketId}}</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3">
+                    <table>
+                        <tr>
+                            <td> TicketID : </td>
+                            <td> {{ticket.ticketId}} </td>
+                        </tr>
+                        <tr>
+                            <td> Description : </td>
+                            <td> {{ticket.requestType}} </td>
+                        </tr>
+                        <tr>
+                            <td>Priority </td>
+                            <td> {{ticket.priority}} </td>
+                        </tr>
+                        <tr>
+                            <td>Status </td>
+                            <td> {{ticket.status}} </td>
+                        </tr>
+                        <tr>
+                            <td> Notes : </td>
+                            <td> {{ticket.notes}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> 

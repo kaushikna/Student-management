@@ -1,0 +1,93 @@
+/* Custom css overrides */
+.page-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.events-table{
+    background-color: #fff !important;
+}
+.table-bordered td, .table-bordered th{
+    border: 0;
+}
+.table-bordered{
+    border: 1px solid rgb(227, 227, 227) !important;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+::ng-deep .table-bordered thead th{
+    background-color: #fff;
+    color: #8898aa;
+    font-size: 11.7px !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.table-bordered thead{
+    border-top: 1px solid rgb(227, 227, 227);
+}
+.events-table td{
+    font-size: 14px; 
+    font-weight: 500;
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: #fff;
+}
+
+::ng-deep #paginationListId .ngx-pagination li{
+    border-radius: 50px;
+}
+::ng-deep #paginationListId .ngx-pagination li.current{
+    background-color: #0880e8;
+}
+::ng-deep #paginationListId .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+.card-header{
+    color: #f6b024;
+    font-weight: 600;
+    font-size: 20px;
+}
+.card label{
+    font-weight: 600;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.mat-expansion-panel{
+    margin-bottom: 10px;
+}
+.mat-expansion-panel .mat-expansion-panel-header{
+    padding: 7px 24px;
+}
+.card-footer{
+    display: flex;
+    gap: 8px;
+}
+.card-footer button{
+    background-color: #0880e8;
+    border-radius: 5px;
+    color: white;
+    border: 0;
+    outline: 0;
+    padding: 5px 10px;
+}
+.form-control-sm{
+    width: 200px;
+    background-color: white;
+    outline: 0;
+    font-size: 12px;
+    border: 1px solid #e4e7ea;
+    height: 33px;
+}
+.pull-right{
+    height: 33px;
+    width: 100px;
+}
+.stretch-card{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    padding: 0;
+}

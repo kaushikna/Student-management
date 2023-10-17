@@ -1,0 +1,30 @@
+.form-group label{
+    font-weight: 500;
+}
+.form-group input, .form-group select,.form-group textarea{
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    background-color: white;
+}
+.add-file{
+    background-color: white;
+    color: #a3a3a3;
+}
+.add-file:hover{
+    background-color: white;
+}
+.preview img{
+    width: 20px;
+    height: 20px;
+}
+.form-check-input{
+    height: 15px;
+    border: 1px solid #ced4da;
+    width: 15px;
+}
+.form-check-label{
+    font-size: 15px;
+}
+.subjects-list{
+    margin-top: 3px;
+}

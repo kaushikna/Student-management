@@ -1,0 +1,11 @@
+<ng-template #modal>
+  <div class="modal-header bg-white">
+    <h4 class="modal-title">{{ modalConfig.modalTitle }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-content></ng-content>
+  </div>
+</ng-template>

@@ -1,0 +1,108 @@
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+<div>
+  <div class="row  question-margin">
+    <label for="testName" class="col-sm-3 col-form-label text-left">Question No: </label>
+    <div class="col-sm-3" type="text">
+      <input class="form-control" type="number" disabled formControlName="questionNum" value="{{ questionNo+1 }}"
+        placeholder="Enter Question" />
+    </div>
+    <label for="testName" class="col-sm-3 col-form-label text-left">Type: </label>
+    <div class="col-sm-3" type="text">
+      <select class="form-control" formControlName="questionTypeId" #qimage (change)="questionImageType(qimage.value)">
+        <option class="dropdown-content" value="0"> Simple</option>
+        <option class="dropdown-content" value="1"> Image</option>
+      </select>
+    </div>
+  </div>
+  <div class="row  question-margin mt-10">
+    <label for="testName" class="col-sm-3 col-form-label text-left">Question Test: </label>
+    <div class="col-sm-9" type="text">
+      <input class="form-control" type="text" formControlName="name" placeholder="Enter Question" />
+    </div>
+  </div>
+  <div class="row  question-margin">
+    <div class="col-sm-12" type="text" hidden>
+      <label for="testName" class="col-sm-1 col-form-label text-left">result: </label>
+      <input class="form-control" type="text" formControlName="resultOption" value="{{entryTextValue}}"
+        placeholder="result" />
+    </div>
+
+      <div class="col-sm-12" *ngIf="qtype">
+        <div class="row">
+        <label for="testName" class="col-sm-3 col-form-label text-left">image: </label>
+        <div class="col-sm-3" *ngIf="preview !=''"> <img [src]="preview" style="max-height:60px;"></div>
+        <input formControlName="image" hidden>
+        <!-- <input type='file' formControlName="image" [(ngModel)]="url" value="{{image}}" (change)="onSelectFile($event)"> -->
+        <div class="col-sm-6"><input type="file" name="avatar" accept="image/*" (change)="uploadFile($event,null)"></div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="row question-margin">
+      <label class="col-sm-3 col-form-label text-left">Question
+        marks</label>
+      <div class="col-sm-3">
+        <input type="number" id="marks" appNumbersOnly class="form-control" formControlName="marks" />
+      </div>
+      <label for="selectedOptionType{{ questionNo }}" class="col-sm-3 col-form-label text-left">Options
+        Type</label>
+        <div class="col-sm-3" *ngIf="question.optionType">
+          <select class="form-control" id="optionType{{ questionNo+1 }}" formControlName="optionsType"
+            #selecquestionOption (change)="questionOption(selecquestionOption.value)" required>
+            <option class="dropdown-content" value="{{ oType.id }}"
+              *ngFor="let oType of question.optionType; let i = index">
+              {{ oType.value }}</option>
+          </select>
+        </div>
+    </div>
+
+  <!-- radio section qForm -->
+  <div *ngIf="optionFormArray">
+    <div *ngFor="let optionFormGroup of optionFormArray['controls'] let optionNo = index">
+      <div [formGroup]="optionFormGroup" class="row question-margin">
+        <div class="col-sm-6">
+          <div class="row">
+          <div *ngIf="!selecquestionOption">
+            <input formControlName="selectedOption" type="radio" value="{{ optionNo}}"
+              [(ngModel)]='entryTextValue'>
+            <!-- <label for="{{ optionNo+1 }}"> {{entryText.value}}: </label> -->
+          </div>
+          <div *ngIf="selecquestionOption">
+            <input formControlName="selectedOption" type="checkbox" value="{{ optionNo+1 }}">
+          </div>
+          <div class="col-sm-6" *ngIf="optionFormGroup['controls'].entryType.value ==0" type="text">
+            <input class="form-control" formControlName="entryText"
+              (change)="changeText($event, optionFormGroup['controls'])" placeholder="Option Text" required />
+          </div>
+          <div class="col-sm-6" *ngIf="optionFormGroup['controls'].entryType.value ==1">
+            <img *ngIf="optionPreview[optionNo]" [src]="optionPreview[optionNo]" height="200"> <br />
+            <input formControlName="entryImage" hidden>
+            <input type="file" name="avatar" accept="image/*" required (change)="uploadFileOption($event, optionNo)">
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+          <label for="selectedQuetionType{{ optionNo }}" class="col-sm-5 col-form-label text-left">Enter Type</label>
+          <div class="col-sm-5">
+            <select class="form-control" id="optionUploadTypes{{ optionNo+1 }}" formControlName="entryType" required>
+              <option class="dropdown-content" *ngFor="let oUType of optionUploadType; let i = index"
+                value="{{ oUType.id }}">
+                {{ oUType.value }}</option>
+            </select>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>

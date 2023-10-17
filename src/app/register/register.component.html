@@ -1,0 +1,883 @@
+<!-- About Banner with dark strip-->
+
+
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+  <div class="content-wrapper d-flex align-items-center auth">
+    <div class="row flex-grow">
+      <!-- Right Column -->
+      <div class="col-md-11 mx-auto">
+        <div class="auth-form-light">
+          <h1 class="logo mr-auto text-center">
+            <a class="navbar-brand brand-logo nav-link pl-0 ml-0 scrollto">
+              <img alt="ExamPrepHub" src="../../assets/images/logo_testpaper.png" width="50%"/>
+            </a>
+          </h1>
+          <!-- 2 column layout -->
+
+          <div class="container-fluid">
+            <h4 class="text-primary mb-0">Create your account</h4>
+          </div>
+
+
+          <form [formGroup]="form" (ngSubmit)="onRegister()">
+
+            <div class="container-fluid">
+              <p class="text-right pb-0 mb-0">Already registered?
+                <a routerLink="/login">Login</a>
+              </p>
+              <div class="form-group row">
+
+                <div class="col-md-3">
+
+                  <div class="form-group">
+                    <label>I am a</label>
+                    <select class="form-control form-control-sm" formControlName="role" required
+                      (change)="onRoleChange()">
+                      <option class="dropdown-content" *ngFor="let option of roles" [value]="option.value"> {{
+                        option.title }}
+                      </option>
+                    </select>
+                  </div>
+
+
+                </div>
+
+              </div>
+              <hr />
+
+              <div *ngIf="Role.STUDENT === registerFormControl.role.value" id="student-reg-div">
+
+                <h3 class="page-title font-weight-bold text-dark">Student Information</h3>
+
+                <div class="row mt-3">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Grade<span class="text-danger">*</span></label>
+                      <select
+                        [ngClass]="{ 'is-invalid': registerFormControl.grade.touched && registerFormControl.grade.invalid }"
+                        class="form-control form-control-sm" formControlName="grade" required>
+                        <option>Select</option>
+                        <option class="dropdown-content" *ngFor="let option of grades"> {{ option.value }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>First Name<span class="text-danger">*</span></label>
+                      <input type="fname" class="form-control form-control-sm" autocomplete="off"
+                        formControlName="firstName" required id="fname" placeholder="First Name"
+                        [ngClass]="{ 'is-invalid': registerFormControl.firstName.touched && registerFormControl.firstName.invalid }" />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.firstName.invalid && (registerFormControl.firstName.dirty || registerFormControl.firstName.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.firstName.errors.required">
+                        First Name is required.
+                      </div>
+                      <div *ngIf="registerFormControl.firstName.errors.minlength">
+                        Name must be at least 4 characters long.
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="inputPassword">Last Name<span class="text-danger">*</span></label>
+                      <input type="lname" autocomplete="off"
+                        [ngClass]="{ 'is-invalid': registerFormControl.lastName.touched && registerFormControl.lastName.invalid }"
+                        class="form-control form-control-sm" id="lname" placeholder="Last Name"
+                        formControlName="lastName" required />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.lastName.invalid && (registerFormControl.lastName.dirty || registerFormControl.lastName.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.lastName.errors.required">
+                        Last Name is required.
+                      </div>
+                      <div *ngIf="registerFormControl.lastName.errors.minlength">
+                        Name must be at least 4 characters long.
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group" for="dob">
+                      <label>Date Of Birth</label>
+
+                      <input type="date" class="form-control form-control-sm" [max]="today"
+                        formControlName="dateOfBirth" />
+
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <label for="fname">Address</label>
+
+
+                      <input type="text" class="form-control form-control-sm" formControlName="address"
+                        placeholder="Address"
+                        [ngClass]="{ 'is-invalid': submitted && registerFormControl.address.errors }" />
+
+                    </div>
+
+                    <div *ngIf="submitted && registerFormControl.address.errors" class="invalid-feedback">
+                      <div *ngIf="registerFormControl.address.errors.required">Address is required</div>
+                    </div>
+
+
+                  </div>
+
+
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="inputPassword">Email<span class="text-danger">*</span></label>
+
+                      <input type="email" class="form-control form-control-sm"
+                        [ngClass]="{ 'is-invalid': registerFormControl.email.touched && registerFormControl.email.invalid }"
+                        placeholder="Enter Email id" formControlName="email" required />
+
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.email.invalid && (registerFormControl.email.dirty || registerFormControl.email.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.email.errors.required">
+                        Email is required.
+                      </div>
+                      <div *ngIf="registerFormControl.email.errors.email">
+                        Invalid Email
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="inputPassword">Phone<span class="text-danger">*</span></label>
+
+
+                      <input type="phone" autocomplete="off" class="form-control form-control-sm" [appPhone]
+                        [ngClass]="{ 'is-invalid': registerFormControl.mobileNo.touched && registerFormControl.mobileNo.invalid }"
+                        placeholder="Phone Number" formControlName="mobileNo" required />
+
+
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.mobileNo.invalid && (registerFormControl.mobileNo.dirty || registerFormControl.mobileNo.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.mobileNo.errors.required">
+                        Mobile No is required.
+                      </div>
+                      <div *ngIf="registerFormControl.mobileNo.errors.minlength">
+                        Mobile No Should be 10 Digits
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Gender<span class="text-danger">*</span></label>
+
+                      <select class="form-control form-control-sm" formControlName="gender">
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                        <option value='other'>Other</option>
+                      </select>
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.gender.invalid && (registerFormControl.gender.dirty || registerFormControl.gender.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.gender.errors.required">
+                        Gender is required.
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group" enctype="multipart/form-data">
+                      <label for="inputPassword">Upload Profile<span class="text-danger">*</span></label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="avatar" accept="image/*"
+                          (change)="uploadFile($event)">
+
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    </div>
+                   
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">Country</label>
+                      <select class="form-control form-control-sm" (change)="onCountryChange($event)"
+                        formControlName="country"
+                        [ngClass]="{ 'is-invalid': registerFormControl.country.touched && registerFormControl.country.invalid }">
+                        <option class="dropdown-content" *ngFor="let country of countries" [value]="country.value"> {{
+                          country.title
+                          }}
+                        </option>
+                      </select>
+                    </div>
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                      <div *ngIf="f.country.errors.required">Country is required</div>
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">State</label>
+                      <select class="form-control form-control-sm" (change)="onStateChange($event)"
+                        formControlName="state"
+                        [ngClass]="{ 'is-invalid': registerFormControl.state.touched && registerFormControl.state.invalid }">
+                        <option class="dropdown-content" *ngFor="let state of states" [value]="state.name"> {{
+                          state.name
+                          }}
+                        </option>
+                      </select>
+                    </div>
+                    <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                      <div *ngIf="f.state.errors.required">State is required</div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">City</label>
+                      <select class="form-control form-control-sm" formControlName="city"
+                        [ngClass]="{ 'is-invalid': registerFormControl.city.touched && registerFormControl.city.invalid }">
+                        <option class="dropdown-content" *ngFor="let city of cities" [value]="city.name"> {{
+                          city.name
+                          }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                      <div *ngIf="f.city.errors.required">City is required</div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">Zip Code</label>
+                      <input class="form-control form-control-sm" formControlName="zip" placeholder="Zip"
+                        [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" />
+                    </div>
+                    <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+                      <div *ngIf="f.zip.errors.required">Zip is required</div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+
+                <hr />
+                <h3 class="page-title font-weight-bold text-dark">Parent / Guardian Details</h3>
+
+
+
+                <div class="row mt-3">
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>First Name</label>
+
+                      <input type="fname" class="form-control form-control-sm" formControlName="parentFirstName"
+                        id="parentFirstName" placeholder="First Name" />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.parentFirstName.invalid && (registerFormControl.parentFirstName.dirty || registerFormControl.parentFirstName.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.parentFirstName.errors.required">
+                        First Name is required.
+                      </div>
+                      <div *ngIf="registerFormControl.parentFirstName.errors.minlength">
+                        Name must be at least 4 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Last Name</label>
+                      <input type="lname" class="form-control form-control-sm" formControlName="parentLastName"
+                        id="parentLastName" placeholder="Last Name" />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.parentLastName.invalid && (registerFormControl.parentLastName.dirty || registerFormControl.parentLastName.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.parentLastName.errors.required">
+                        Lirst Name is required.
+                      </div>
+                      <div *ngIf="registerFormControl.parentLastName.errors.minlength">
+                        Name must be at least 4 characters long.
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" class="form-control form-control-sm" id="parentEmail"
+                        placeholder="Enter Parent email id" formControlName="parentEmail" />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.parentEmail.invalid && (registerFormControl.parentEmail.dirty || registerFormControl.parentEmail.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.parentEmail.errors.required">
+                        Emaail is required.
+                      </div>
+                      <div *ngIf="registerFormControl.parentEmail.errors.email">
+                        Invalid Email
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="phone" class="form-control form-control-sm" id="parentPhone"
+                        placeholder="Parent phone number" formControlName="parentPhone" [appPhone] />
+                    </div>
+                    <div
+                      *ngIf="registerFormControl.parentPhone.invalid && (registerFormControl.parentPhone.dirty || registerFormControl.parentPhone.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerFormControl.parentPhone.errors.required">
+                        Emaail is required.
+                      </div>
+                      <div *ngIf="registerFormControl.parentPhone.errors.minlength">
+                        Mobile No Should be 10 Digits
+                      </div>
+                      <div *ngIf="registerFormControl.parentPhone.errors.maxlength">
+                        Mobile No Should be 10 Digits
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+
+                      <re-captcha (resolved)="captchaResolved($event)" formControlName="recaptchaReactive">
+                      </re-captcha>
+
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+                <hr />
+
+
+                <div class="row">
+                  <div class="col-md-12 text-right pb-5 pt-4">
+                    <button type="submit" [disabled]="!form.valid"
+                      class="btn btn-primary">SUBMIT</button>
+
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="Role.TUTOR === registerFormControl.role.value" id="tutor-reg-div">
+
+                <h3 class="page-title font-weight-bold text-dark">Tutor Registration</h3>
+
+
+                <div class="row mt-4">
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>First Name <span class="text-danger">*</span></label>
+                      <input type="fname" class="form-control form-control-sm"
+                      [ngClass]="{ 'is-invalid': registerFormControl.firstName.touched && registerFormControl.firstName.invalid }"
+                      autocomplete="off" formControlName="firstName" required id="fname" placeholder="First Name" />
+                    </div>
+                    <div
+                    *ngIf="registerFormControl.firstName.invalid && (registerFormControl.firstName.dirty || registerFormControl.firstName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerFormControl.firstName.errors.required">
+                      First Name is required.
+                    </div>
+                    <div *ngIf="registerFormControl.firstName.errors.minlength">
+                      Name must be at least 4 characters long.
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="inputPassword">Last Name
+                        <span class="text-danger">*</span>
+                      </label>
+
+                      <input type="lname" class="form-control form-control-sm"
+                        [ngClass]="{ 'is-invalid': registerFormControl.lastName.touched && registerFormControl.lastName.invalid }"
+                        autocomplete="off" id="lname" placeholder="Last Name" formControlName="lastName" required />
+
+                    </div>
+                    <div
+                    *ngIf="registerFormControl.lastName.invalid && (registerFormControl.lastName.dirty || registerFormControl.lastName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerFormControl.lastName.errors.required">
+                      Last Name is required.
+                    </div>
+                    <div *ngIf="registerFormControl.lastName.errors.minlength">
+                      Name must be at least 4 characters long.
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Email
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="email" class="form-control form-control-sm"
+                        [ngClass]="{ 'is-invalid': registerFormControl.email.touched && registerFormControl.email.invalid }"
+                        formControlName="email" placeholder="Enter email"/>
+                     
+                    </div>
+                    <div
+                    *ngIf="registerFormControl.email.invalid && (registerFormControl.email.dirty || registerFormControl.email.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerFormControl.email.errors.required">
+                      Email is required.
+                    </div>
+                    <div *ngIf="registerFormControl.email.errors.email">
+                      Invalid Email
+                    </div>
+                  </div>
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Phone
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="phone" autocomplete="off"
+                      [ngClass]="{ 'is-invalid': registerFormControl.mobileNo.touched && registerFormControl.mobileNo.invalid }"
+                      class="form-control form-control-sm" id="phone" [appPhone] placeholder="Phone Number"
+                      formControlName="mobileNo" required />
+                    </div>
+                    <div
+                        *ngIf="registerFormControl.mobileNo.invalid && (registerFormControl.mobileNo.dirty || registerFormControl.mobileNo.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="registerFormControl.mobileNo.errors.required">
+                          Mobile No is required.
+                        </div>
+                        <div *ngIf="registerFormControl.mobileNo.errors.minlength">
+                          Mobile No Should be 10 Digits
+                        </div>
+                      </div>
+                  </div>
+                
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Qualification
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" class="form-control form-control-sm"
+                      [ngClass]="{ 'is-invalid': registerFormControl.qualification.touched && registerFormControl.qualification.invalid }"
+                      formControlName="qualification" />
+                    </div>
+                      
+                    <div
+                    *ngIf="registerFormControl.qualification.invalid && (registerFormControl.qualification.dirty || registerFormControl.qualification.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerFormControl.qualification.errors.required">
+                      Qualification No is required.
+                    </div>
+                  </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Date Of Birth
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" [max]="today" class="form-control form-control-sm" formControlName="dateOfBirth" />
+                    </div>
+                    <div
+                        *ngIf="registerFormControl.dateOfBirth.invalid && (registerFormControl.dateOfBirth.dirty || registerFormControl.dateOfBirth.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="registerFormControl.dateOfBirth.errors.required">
+                          Date of Birth is required.
+                        </div>
+                      </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Gender
+                        <span class="text-danger">*</span>
+                      </label>
+                      <select class="form-control form-control-sm" formControlName="gender">
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                        <option value='other'>Other</option>
+                      </select>
+                    </div>
+                    <div
+                        *ngIf="registerFormControl.gender.invalid && (registerFormControl.gender.dirty || registerFormControl.gender.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="registerFormControl.gender.errors.required">
+                          Gender is required.
+                        </div>
+                      </div>
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Available From
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" class="form-control" [min]="today" formControlName="availableFrom" />
+                    </div>
+                    <div
+                    *ngIf="registerFormControl.availableFrom.invalid && (registerFormControl.availableFrom.dirty || registerFormControl.availableFrom.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerFormControl.availableFrom.errors.required">
+                      Available From is required.
+                    </div>
+                  </div>
+                  </div>
+
+
+
+
+                  
+
+
+                  <div class="col-md-3">
+                    <div class="form-group" enctype="multipart/form-data">
+                      <label for="inputPassword">Upload Profile (Upto 2MB)<span class="text-danger">*</span></label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="avatar" accept="image/*"
+                          (change)="uploadFile($event)">
+
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Error Message</div>
+                   
+                  </div>
+
+
+
+                
+                  <div class="col-md-3">
+                    <div class="form-group" enctype="multipart/form-data">
+                      <label for="inputPassword">Upload Resume (Upto 2MB)<span class="text-danger">*</span></label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="avatar" accept="image/*"
+                          (change)="uploadFile($event)">
+
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Error Message</div>
+                  </div>
+
+
+
+                 
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">Country</label>
+                      <select class="form-control form-control-sm" (change)="onCountryChange($event)" formControlName="country"
+                        [ngClass]="{ 'is-invalid': registerFormControl.country.touched && registerFormControl.country.invalid }">
+                        <option class="dropdown-content" *ngFor="let country of countries" [value]="country.value"> {{
+                          country.title
+                          }}
+                        </option>
+                      </select>
+                    </div>
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                      <div *ngIf="f.country.errors.required">Country is required</div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">State</label>
+                      <select class="form-control form-control-sm" (change)="onStateChange($event)" formControlName="state"
+                      [ngClass]="{ 'is-invalid': registerFormControl.state.touched && registerFormControl.state.invalid }">
+                      <option class="dropdown-content" *ngFor="let state of states" [value]="state.name"> {{
+                        state.name
+                        }}
+                      </option>
+                    </select>
+                    </div>
+                    <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                      <div *ngIf="f.state.errors.required">State is required</div>
+                    </div>
+                  </div>
+                
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">City</label>
+                      <select class="form-control form-control-sm" formControlName="city"
+                        [ngClass]="{ 'is-invalid': registerFormControl.city.touched && registerFormControl.city.invalid }">
+                        <option class="dropdown-content" *ngFor="let city of cities" [value]="city.name"> {{
+                          city.name
+                          }}
+                        </option>
+                      </select>
+                    </div>
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                      <div *ngIf="f.city.errors.required">City is required</div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="fname">Zip</label>
+                      <input class="form-control form-control-sm" formControlName="zip" placeholder="Zip"
+                        [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" />
+                    </div>
+                    <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+                      <div *ngIf="f.zip.errors.required">Zip is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Summary
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input class="form-control form-control-sm" type="text" formControlName="summary"/>
+                    </div>
+                    <div
+                        *ngIf="registerFormControl.summary.invalid && (registerFormControl.summary.dirty || registerFormControl.summary.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="registerFormControl.summary.errors.required">
+                          Summary is required.
+                        </div>
+                      </div>
+                  </div>
+
+
+
+
+
+
+      <div class="col-md-12">
+                    <div class="form-group">
+                      <div>
+                      <label>Subjects
+                        <span class="text-danger">*</span>
+                      </label>
+                    </div>
+                      <div class="form-check form-check-inline subjects mt-0"
+                      *ngFor="let subject of form.controls.subjects.controls; let i=index;">
+                      <input class="form- check-input" type="checkbox" [formControl]="subject">
+                      <label class="form-check-label">{{subjects[i].name}}
+                        <strong>  ({{subjects[i].entityType | titlecase}})</strong>
+                      </label>
+                    </div>
+                    </div>
+                    <div class="invalid-feedback">Error Message</div>
+                  </div>
+                  
+               
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+
+                      <re-captcha (resolved)="captchaResolved($event)" formControlName="recaptchaReactive">
+                      </re-captcha>
+
+
+                    </div>
+
+                  </div>
+
+                  
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row mt-4 d-none">
+
+
+
+
+
+                  <div class="col-md-6">
+                   
+
+                   
+             
+
+                   
+
+
+                   
+
+
+
+
+                   
+
+                  
+
+                  </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+                <hr>
+                <div class="row">
+                  <div class="col-md-12 text-right pb-5 pt-4">
+                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+                    <button type="submit" class="btn btn-link">Cancel</button>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

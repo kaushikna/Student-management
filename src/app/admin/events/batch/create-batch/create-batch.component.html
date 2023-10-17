@@ -1,0 +1,78 @@
+<form [formGroup]="form" (ngSubmit)="onClickCreateBatch()" *ngIf="form">
+
+
+  <div class="p-2">
+    <div class="form-group row mx-0">
+      <label for="date" class="col-sm-5 col-form-label text-left"> Exam Type <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <select class="form-control" formControlName="entityId"
+          [ngClass]="{ 'is-invalid': submitted && f.entityId.errors }">
+          <option class="dropdown-content" *ngFor="let entity of entities" [ngValue]="entity._id"> {{ entity.title }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.entityId.errors" class="invalid-feedback">
+          <div *ngIf="f.entityId.errors.required"> Exam Type is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label for="date" class="col-sm-5 col-form-label text-left"> Plan <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <select class="form-control" formControlName="plan" [ngClass]="{ 'is-invalid': submitted && f.plan.errors }">
+          <option class="dropdown-content" *ngFor="let plan of plans" [ngValue]="plan.id"> {{ plan.value }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.plan.errors" class="invalid-feedback">
+          <div *ngIf="f.plan.errors.required"> Plan is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label for="fname" class="col-sm-5 col-form-label">Name of the Batch <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="batchName" placeholder="Batch Name"
+          [ngClass]="{ 'is-invalid': submitted && f.batchName.errors }" />
+        <div *ngIf="submitted && f.batchName.errors" class="invalid-feedback">
+          <div *ngIf="f.batchName.errors.required">Batch Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label for="fname" class="col-sm-5 col-form-label">Hours <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <input type="number" class="form-control" formControlName="hours" placeholder="Hours"
+          [ngClass]="{ 'is-invalid': submitted && f.hours.errors }" />
+        <div *ngIf="submitted && f.batchName.errors" class="invalid-feedback">
+          <div *ngIf="f.hours.errors.required">Hours are required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label for="date" class="col-sm-5 col-form-label text-left"> From Date <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <input type="date" class="form-control" [min]="today" name="fromDate" formControlName="fromDate"
+          [ngClass]="{ 'is-invalid': submitted && f.fromDate.errors }" />
+        <div *ngIf="submitted && f.fromDate.errors" class="invalid-feedback">
+          <div *ngIf="f.fromDate.errors.required"> From Date is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label for="date" class="col-sm-5 col-form-label text-left"> To Date <span class="text-danger">*</span></label>
+      <div class="col-sm-7">
+        <input type="date" class="form-control" [min]="today" name="toDate" formControlName="toDate"
+          [ngClass]="{ 'is-invalid': submitted && f.toDate.errors }" />
+        <div *ngIf="submitted && f.toDate.errors" class="invalid-feedback">
+          <div *ngIf="f.toDate.errors.required"> To Date is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end mb-2 mt-3">
+      <button class="btn btn-primary" style="width: 150px;">Submit</button>
+    </div>
+  </div>
+</form>

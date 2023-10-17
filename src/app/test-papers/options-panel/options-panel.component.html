@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row question-margin col-sm-12" style="margin-top: 1rem;margin-left: 1rem;">
+                        <div>
+                            <input id="male" type="radio" value="male">
+                            <label *ngIf="oForm && oForm['selectedOption'] =='Check'" for="male">Male</label>
+                        </div>
+                        <div class="col-sm-4" *ngIf="oForm && oForm['selectedOption'] =='Text'" type="text">
+                            <input class="form-control" formControlName="optionText" required placeholder="Option Text" />
+                        </div>
+                        <div class="col-sm-6" *ngIf="oForm && oForm['selectedOption'] =='Image'">
+                            <input type="file" name="avatar" formControlName="optionImage" accept="image/*" (change)="uploadFile($event)">
+                        </div>
+                        <label for="selectedQuetionType{{ optionNo }}" class="col-sm-5 col-form-label text-left">Enter Type
+                        </label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="optionUploadTypes{{ optionNo+1 }}" (change)="changeSuit($event)" required>
+                                <option class="dropdown-content" *ngFor="let oUType of optionUploadType; let i = index">
+                                    {{ oUType.value }}</option>
+                            </select>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

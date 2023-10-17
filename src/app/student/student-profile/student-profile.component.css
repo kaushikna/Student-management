@@ -1,0 +1,151 @@
+.profile-pic {
+    margin: 0;
+    gap: 35px;
+}
+.profile-pic img{
+    width: 100px;
+    height: 100px;
+}
+.profile-pic .page-title{
+    font-weight: 600;
+}
+table{
+    width: 560px;
+}
+table tr td:first-child{
+    font-weight: 600;
+}
+
+/* ----modal---- */
+.modal-dialog{
+    max-width: 550px;
+}
+.modal-content{
+    border-radius: 10px;
+    border: 0;
+    background-color: transparent;
+}
+.modal-content form{
+    background-color: transparent;
+}
+.modal-body{
+    padding: 0 20px !important;
+}
+.modal-header{
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+    border: 0;
+}
+.modal-header h5{
+    font-size: 18px;
+    font-weight: 600;
+}
+.modal-header button{
+    color: white;
+    opacity: 1;
+}
+.modal-body,.modal-footer{
+    background-color: white;
+    padding: 0;
+}
+.modal-footer{
+    padding: 15px;
+    border: 0;
+}
+.modal-footer button{
+    margin: 0;
+    width: 118px;
+}
+.modal-dialog .close{
+    color: grey;
+}
+select,textarea,input{
+    font-size: 15px;
+}
+.modal-body .heading{
+    font-size: 23px;
+    font-weight: 600;
+    color: #f6b024;
+}
+.modal-body .form-group .col-form-label{
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: 600;
+}
+.modal-body .info-sec .i{
+    height: 22px;
+    width: 26px;
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #007bff;
+    border-radius: 50px;
+}
+.modal-body .info-sec span{
+    font-size: 15px;
+    color: rgb(69, 69, 69);
+}
+.modal-body .semi-title{
+    color: #4a4a4a;
+}
+
+.modal-body a{
+    margin-top: 22px;
+    text-decoration: underline;
+    color: #4a4a4a;
+}
+.modal-body a:hover{
+    text-decoration: underline;
+    color: #4a4a4a;
+}
+.modal .passwordreset{
+    width: 480px;
+}
+
+
+
+.profile_setting .profile_head{
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: #f6b024;
+}
+.profile_setting .profile_col{
+    padding: 15px;
+}
+.profile_setting .profile_col h1{
+    font-size: 16px;
+    font-weight: 600;
+}
+.profile_setting .profile_col p{
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.profile_setting .address_data{
+    max-width: 160px;
+}
+.profile_setting .additional{
+    max-width: 270px;
+}
+.profile_setting .security{
+    color: #f6b024;
+    font-weight: 600;
+    font-size: 28px;
+    margin: 40px 0 40px;
+}
+.profile_setting .profile_col a{
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #007bff;
+}
+@media (max-width:575px){
+    .profile_setting .row{
+        gap: 20px;
+    }
+}

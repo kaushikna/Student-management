@@ -1,0 +1,555 @@
+<div class="content-wrapper px-3">
+    <div class="row">
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="col-lg-12 grid-margin stretch-card d-flex justify-content-end p-0 mb-0"></div>
+              
+                <div class="profile_setting">
+                    <h1 class="profile_head">Profile Settings</h1>
+                    <div class="row">
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>Full Name</h1>
+                            <p>{{user.firstName}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#Studentname">Edit</a>
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>Address</h1>
+                            <p class="address_data">{{user.address}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#Studentaddress">Edit</a>
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>Contact Phone Number</h1>
+                            <p>{{user.mobileNo}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#phonestudent">Edit</a>
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col" *ngIf="user.role === 'student'">
+                            <h1>Parent Name</h1>
+                            <p>{{user.parent?.firstName}} {{user.parent?.lastName}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#parentdetials">Edit</a>
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col" *ngIf="user.role === 'student'">
+                            <h1>Parent Phone</h1>
+                            <p>{{user.parent?.mobileNo}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#phoneparent">Edit</a>
+                        </div>
+
+                    </div>
+                    <h1 class="security">Security</h1>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>Email</h1>
+                            <p>{{user.email}}</p>
+                            <a  data-toggle="modal"
+                                data-target="#emailstudent">Edit</a>
+
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>reset password</h1>
+                            <p style="font-size: 20px;">........</p>
+                            <a  data-toggle="modal"
+                                data-target="#resetpassword">Edit</a>
+
+                        </div>
+                        <div class="col-sm-4 col-lg-3 profile_col">
+                            <h1>Multi-factor Authentication</h1>
+                            <p class="additional">Add an additional layer of security to your account</p>
+                            <a data-toggle="modal"
+                            data-target="#Multifactor">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="editProfile" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6>Profile Information</h6>
+                    <div *ngIf="user.role === 'student'" class="form-group row">
+                        <label for="grade" class="col-sm-5 col-form-label text-left">Grade <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <select class="form-control" formControlName="grade"
+                                [ngClass]="{ 'is-invalid': submitted && f.grade.errors }">
+                                <option value="">Select</option>
+                                <option class="dropdown-content" *ngFor="let option of grades" [value]="option.value">
+                                    {{ option.value }}</option>
+                            </select>
+                            <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+                                <div *ngIf="f.grade.errors.required">Grade Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-5 col-form-label">First Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                                <div *ngIf="f.firstName.errors.minlength">First Name should be minimum of 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-5 col-form-label">Last Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                <div *ngIf="f.lastName.errors.minlength">Last Name should be minimum of 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-5 col-form-label">Phone</label>
+                        <div class="col-sm-7">
+                            <input type="phone" [appPhone] class="form-control" formControlName="mobileNo"
+                                placeholder="Phone" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                            <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+                                <div *ngIf="f.mobileNo.errors.pattern">Mobile No must be 10 Digits</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Date Of Birth</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" name="dateOfBirth" formControlName="dateOfBirth"
+                                [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" />
+                            <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback">
+                                <div *ngIf="f.dateOfBirth.errors.required">Date Of Birth is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <ng-container *ngIf="user.role === 'student'">
+                        <h6>Parent/Guardian Details</h6>
+                        <div [formGroup]="form.controls.parent">
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-5 col-form-label">First Name</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="Parent First Name"
+                                        formControlName="firstName" placeholder="First Name"
+                                        [ngClass]="{ 'is-invalid': submitted && f.parent.controls.firstName.errors }" />
+                                    <div *ngIf="submitted && f.parent.controls.firstName.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.parent.controls.firstName.errors.required">First Name is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-5 col-form-label">Last Name</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" formControlName="lastName"
+                                        placeholder="Last Name"
+                                        [ngClass]="{ 'is-invalid': submitted && f.parent.controls.lastName.errors }" />
+                                    <div *ngIf="submitted && f.parent.controls.lastName.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.parent.controls.lastName.errors.required">Last Name is
+                                            required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-5 col-form-label">Email</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" formControlName="email" placeholder="Email"
+                                        [ngClass]="{ 'is-invalid': submitted && f.parent.controls.email.errors }" />
+                                    <div *ngIf="submitted && f.parent.controls.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.parent.controls.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.parent.controls.email.errors.email">Email must be a valid
+                                            email address</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-5 col-form-label">Phone</label>
+                                <div class="col-sm-7">
+                                    <input type="phone" [appPhone] class="form-control" formControlName="mobileNo"
+                                        placeholder="Phone"
+                                        [ngClass]="{ 'is-invalid': submitted && f.parent.controls.mobileNo.errors }" />
+                                    <div *ngIf="submitted && f.parent.controls.mobileNo.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.parent.controls.mobileNo.errors.required">Mobile No is
+                                            required</div>
+                                        <div *ngIf="f.parent.controls.mobileNo.errors.pattern">Mobile No must be 10
+                                            Digits</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </form>
+            </div>
+            <div class="d-flex justify-content-end p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emailstudent" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h6 class="heading">Edit Email</h6>
+                    <div class="info-sec d-flex my-3" style="gap: 7px;">
+                        <div class="i">i</div>
+                        <span>Once updated, your current email can not be used to sign in or recover your account</span>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-9 mx-auto py-1">
+                            <label for="fname" class="col-form-label">Current Email</label>
+                            <input type="text" class="form-control" placeholder="Email" />
+
+                        </div>
+                        <div class="col-9 mx-auto py-1">
+                            <label for="fname" class="col-form-label">New Email</label>
+                            <input type="text" class="form-control" name="New Email" placeholder="New Email" />
+
+                        </div>
+                        <div class="col-9 mx-auto py-1">
+                            <label for="fname" class="col-form-label">Confirm New Email</label>
+                            <input type="text" class="form-control" name="First Name" placeholder="Confirm New Email" />
+
+                            <div class="d-flex justify-content-start py-3 modal-footer px-0">
+                                <button class="btn btn-primary w-100 ">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="phoneparent" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Edit Phone Number</h6>
+                    <div class="form-group row">
+                        <div class="col-9">
+                            <label for="fname" class="pb-2 col-form-label">Phone Number</label>
+                            <input type="phone" [appPhone] class="form-control" formControlName="Phone"
+                                placeholder="Phone" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                            <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+                                <div *ngIf="f.mobileNo.errors.pattern">Mobile No must be 10 Digits</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Studentname" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Edit Full Name</h6>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-12 col-form-label">First Name</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="First Name" formControlName="firstName"
+                                placeholder="First Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.parent.controls.firstName.errors }" />
+                            <div *ngIf="submitted && f.parent.controls.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.parent.controls.firstName.errors.required">First Name is
+                                    required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-12 col-form-label">Last Name</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                <div *ngIf="f.lastName.errors.minlength">Last Name should be minimum of 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="Studentaddress" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Edit Address</h6>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-12 pb-2 col-form-label">Country</label>
+                        <div class="col-12 py-1">
+                            <div class="col-6 pl-0">
+                                <select class="form-control" formControlName="Country"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Country.errors }">
+                                    <option value="">Unites states</option>
+                                    <option class="dropdown-content">
+                                    </option>
+                                </select>
+                                <div class="col-6"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 py-1">
+                            <label for="fname" class=" col-form-label">Address line 1</label>
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Address line 1"
+                                [ngClass]="{ 'is-invalid': submitted && f.Address.errors }" />
+                            <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                                <div *ngIf="f.Address.errors.required">Address is
+                                    required</div>
+
+                            </div>
+                        </div>
+                        <div class="col-6 py-1">
+                            <label for="fname" class=" col-form-label">Address line 2</label>
+
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Address line 2" />
+
+                        </div>
+                        <div class="col-4 py-1">
+                            <label for="fname" class=" col-form-label">City</label>
+
+                            <input type="text" class="form-control" formControlName="City" placeholder="Batesville" />
+
+                        </div>
+                        <div class="col-4 py-1">
+                            <label for="fname" class=" col-form-label">Sates</label>
+
+                            <select class="form-control" formControlName="Sates"
+                                [ngClass]="{ 'is-invalid': submitted && f.Sates.errors }">
+                                <option value="">Arkansas</option>
+                                <option class="dropdown-content">
+                                </option>
+                            </select>
+
+                        </div>
+                        <div class="col-4 py-1">
+                            <label for="fname" class="col-form-label">Zipcode</label>
+
+                            <input type="text" class="form-control" formControlName="Zipcode" placeholder="72501" />
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="phonestudent" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Edit Phone Number</h6>
+                    <div class="form-group row">
+                        <div class="col-9">
+                            <label for="fname" class="pb-2 col-form-label">Phone Number</label>
+                            <input type="phone" [appPhone] class="form-control" formControlName="mobileNo"
+                                placeholder="Phone" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                            <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+                                <div *ngIf="f.mobileNo.errors.pattern">Mobile No must be 10 Digits</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resetpassword" role="dialog">
+    <div class="modal-dialog passwordreset">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-12 mx-auto py-1">
+                            <h6 class="heading">Reset Password</h6>
+                            <p class="semi-title">Enter tour email address linked yo your account</p>
+                            <label for="fname" class="col-form-label">Email</label>
+                            <div>
+                                <input type="text" class="form-control" formControlName="Email" placeholder="Email"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+                                <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Email.errors.required">Email is required</div>
+                                    <div *ngIf="f.Email.errors.email">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <img src="../../../assets/images/Captcha.png" alt="" class="w-100">
+                            </div>
+                            <p class="semi-title">Enter tour email address linked yo your account</p>
+                            <div class="d-flex justify-content-center py-3 modal-footer px-0">
+                                <button class="btn btn-primary w-100 ">Send</button>
+                                <a href="">Forgot Email</a>
+                            </div>
+                            <div class="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="parentdetials" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Edit Parent Details</h6>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-12 col-form-label">First Name</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="Parent First Name" formControlName="FirstName"
+                                placeholder="First Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.parent.controls.firstName.errors }" />
+                            <div *ngIf="submitted && f.parent.controls.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.parent.controls.firstName.errors.required">First Name is
+                                    required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-12 col-form-label">Last Name</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" formControlName="LastName" placeholder="LastName"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                <div *ngIf="f.lastName.errors.minlength">Last Name should be minimum of 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Multifactor" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSaveUser()" *ngIf="form">
+                    <h6 class="heading">Multi Factor Authenticator</h6>
+                    <div class="form-group row">
+                        <div class="col-9">
+                            <label for="fname" class="pb-0 col-form-label">Phone Number</label>
+                            <input type="phone" [appPhone] class="form-control" formControlName="Phone"
+                                placeholder="Phone" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                            <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+                                <div *ngIf="f.mobileNo.errors.pattern">Mobile No must be 10 Digits</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Done</button>
+            </div>
+        </div>
+    </div>
+</div>

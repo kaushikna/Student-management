@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-12 text-right">
+        <button class="btn btn-primary btn-sm" *ngIf="addQuizButton" (click)="openAddQuiz()">Add Quiz</button>
+    </div>
+</div>
+
+
+<div class="mt-2 mb-4" *ngFor="let chapter of activeChapters;let i = index">
+    <h5>{{chapter.title}}</h5>
+
+    <div class="list-group  lesson-list-small ft-12">
+        <li *ngFor="let quiz of chapter.quiz;let k = index" class="mb-2">
+            <button *ngIf="quiz.edit" class="btn btn-sm btn-light" (click)="openEditQuiz(quiz)">
+                <i class="fa fa-pencil"></i></button>
+            <button *ngIf="quiz.delete" class="btn btn-sm btn-light ml-2 mr-2" (click)="openDeleteQuiz(quiz)">
+                <i class="fa fa-trash"></i></button>
+            <span class="text-primary ft-14 cp-text">
+                Quiz-{{k+1}}: {{quiz.name}}
+            </span>
+
+            <button *ngIf="quiz.startQuizButton && !quiz.result" (click)="onQuizStart(quiz)"
+                class="btn btn-sm btn-primary ml-2 mr-2 ft-11" style="font-weight: normal; font-size: 10px;">
+                Start Quiz</button>
+            <button *ngIf="quiz.result" (click)="onViewResult(quiz)" class="btn btn-sm btn-outline-success ml-2 ft-11">
+                View Result</button>
+
+        </li>
+    </div>
+</div>
+
+
+<app-smart-modal2 #modal [modalConfig]="addQuizConfig">
+    <form (submit)="addQuiz()">
+        <div class="row mb-3 mx-0 px-1 mt-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Select Chapter<span class="text-danger">*</span></label>
+                    <select class="form-control form-control-sm" name="Chapter" [(ngModel)]="quizModel.chapterId">
+                        <option *ngFor="let chapter of chapters" [value]="chapter._id">{{chapter.title}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Select Quiz<span class="text-danger">*</span></label>
+                    <select class="form-control form-control-sm" name="Test Paper" [(ngModel)]="quizModel.testPaperId">
+                        <option *ngFor="let paper of papers" [value]="paper._id">{{paper.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+
+
+<app-smart-modal2 #modal2 [modalConfig]="editQuizConfig">
+    <form (submit)="editQuiz()">
+        <div class="row mb-3 mx-0 px-1 mt-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Select Chapter<span class="text-danger">*</span></label>
+                    <select class="form-control form-control-sm" name="Edit Chapter" [(ngModel)]="quizModel.chapterId">
+                        <option *ngFor="let chapter of chapters" [value]="chapter._id">{{chapter.title}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Select Quiz<span class="text-danger">*</span></label>
+                    <select class="form-control form-control-sm" disabled name="Edit Test Paper"
+                        [(ngModel)]="quizModel.testPaperId">
+                        <option *ngFor="let paper of papers" [value]="paper._id">{{paper.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary" style="width: 100px;">Update</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+
+<!-- Modal HTML -->
+<div id="deleteModalQuiz" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column bg-white">
+                <div class="icon-box">
+                    <i class="mdi mdi mdi-close"></i>
+                </div>
+                <h4 class="modal-title w-100">Delete Item?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure that you want to permanently delete the selected record?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" (click)="onDeleteCancel()">No</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteConfirm()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+.assign{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    app-dropdown-search{
+        width: 250px;
+        margin: 0 10px;
+    }
+}
+
+
+.events-table{
+    background-color: #fff !important;
+}
+.table-bordered td, .table-bordered th{
+    border: 0;
+}
+.table-bordered{
+    border: 1px solid rgb(227, 227, 227) !important;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.table-bordered tr td, .table-bordered thead{
+    border-bottom: 1px solid rgb(227, 227, 227);
+}
+::ng-deep .table-bordered thead th{
+    background-color: #fff;
+    color: #8898aa;
+    font-size: 11.7px !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.table-bordered thead{
+    border-top: 1px solid rgb(227, 227, 227);
+}
+.events-table td{
+    font-size: 14px; 
+    font-weight: 500;
+}
+.events-table tr td:nth-child(5) tr > td{
+    width: 100%;
+    border: 1px solid rgb(215, 215, 215);
+}
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: #fff;
+}
+
+::ng-deep #paginationListId .ngx-pagination li{
+    border-radius: 50px;
+}
+::ng-deep #paginationListId .ngx-pagination li.current{
+    background-color: #0880e8;
+}
+::ng-deep #paginationListId .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+.assign .form-control-md{
+    width: 200px;
+    background-color: white;
+    outline: 0;
+    font-size: 12px;
+    border: 1px solid #e4e7ea;
+    height: 33px;
+}
+.stretch-card{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    padding: 0;
+}

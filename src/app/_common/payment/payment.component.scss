@@ -1,0 +1,52 @@
+.card_expiry{
+    display: flex;
+    align-items: center;
+}
+
+.flex-center{
+    display: flex;
+    align-items: center;
+}
+.tab-content{
+    border: 0 !important;
+    margin-bottom: 25px !important;
+}
+.btn-info.btn-arrow-right{
+    background-color: #459fff !important;
+    border-color: #459fff !important;
+}
+.btn-info.btn-arrow-right.active{
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+.plan-selected {
+    background: rgb(226, 241, 255);
+}
+.payment-tile:hover{
+    background: rgb(226, 241, 255);
+}
+.payment-tile .title{
+    color: #808080;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.next-step{
+    width: 118px;
+}
+.checkout-panel {
+    background-color: #fff;
+    border: 1px solid #f6b024;
+}
+
+.minHeight-175 {
+    min-height: 190px;
+}
+.checkout-panel h3{
+    font-size: 27px;
+}
+select{
+    appearance: auto;
+}
+input,select{
+    font-size: 16px;
+}

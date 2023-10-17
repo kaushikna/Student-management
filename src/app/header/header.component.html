@@ -1,0 +1,68 @@
+
+
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <h1 class="logo mx-auto"><a  class="navbar-brand brand-logo nav-link pl-0 ml-0 scrollto">
+                <img src="../../assets//images/Examprephub.jpg" width="80%" alt="">
+                </a></h1>
+          <a class="navbar-brand brand-logo-mini"><img src="assets/images/logo-small.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+           <!-- <div class="search-field d-none d-xl-block">
+            <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group">
+                <div class="input-group-prepend bg-transparent">
+                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                </div>
+                <input type="text" class="form-control bg-transparent border-0">
+              </div>
+            </form>
+          </div> -->
+          <ul class="navbar-nav navbar-nav-right">
+             <!-- <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../act.html">Act</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../tutoring.html">Tutoring</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../pricing.html">Pricing</a>
+                </li> -->
+                <!-- <li class="nav-item">
+                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                          <i class="mdi mdi-email-outline"></i>
+                          <span class="count-symbol bg-success"></span>
+                        </a>
+                      </li>
+                  <li class="nav-item">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                          <i class="mdi mdi-bell-outline"></i>
+                          <span class="count-symbol bg-danger"></span>
+                        </a>
+                      </li> -->
+                <li class="mr-3 ml-3">
+                        <a *ngIf="!isLoggedIn" (click) = "onLogin($event)" class="py-1 d-flex align-items-center justify-content-between" href="#">
+                                <span>Login</span>
+                                <i class="mdi mdi-logout ml-1"></i>
+                              </a>
+                           <a *ngIf="isLoggedIn" (click) = "onLogout($event)" class="btn-link text-primary py-1 d-flex align-items-center justify-content-between" href="#">
+                                <span>Log Out</span>
+                                <i class="mdi mdi-logout ml-1"></i>
+                              </a>
+                </li>
+            </ul>
+        </div>
+      </nav>

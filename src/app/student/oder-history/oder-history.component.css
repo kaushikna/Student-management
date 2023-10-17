@@ -1,0 +1,26 @@
+.heading{
+    color: #f6b024;
+    font-size: 25px;
+    font-weight: 600;
+}
+.card-data{
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 7px;
+}
+.card-data img{
+    width: 200px;
+    margin: auto;
+    display: flex;
+}
+.card-data .bottom-data{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+.card-data .bottom-data h5,.card-data .bottom-data a{
+    font-size: 15px;
+    margin-bottom: 0;
+}

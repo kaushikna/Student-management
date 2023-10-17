@@ -1,0 +1,41 @@
+<div>
+    <!-- all events with dates -->
+    <div class="part_one">
+        <div class="heading">
+            <h3 class="m-0"> Student Dashboard</h3>
+        </div>
+      
+    </div>
+    <div>
+       
+        <div class="">
+            <div class="  chart_two">
+                <div class=" chart_box">
+                    <app-area-chart></app-area-chart>
+                </div>
+
+                <div class=" chart_box">
+                    <app-bar-chart></app-bar-chart>
+                </div>
+
+            </div>
+            <div class=" chart_three">
+                <div class=" chart_box" id="chart">
+                    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                        [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                        [title]="chartOptions.title" [colors]="chartOptions.colors"></apx-chart>
+                </div>
+                <div class=" chart_box">
+                    <app-pie-chart></app-pie-chart>
+                </div>
+            </div>
+            <div class="chat_four">
+                <div class="chart_box">
+                    <app-line-bar-chart></app-line-bar-chart>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+::ng-deep app-dashboard-left-nav{
+    background-color: unset;
+}
+.dashborad{
+    color: black;
+}
+::ng-deep .sidebar-offcanvas .nav .nav-item .nav-link .menu-icon{
+    height: 20px;
+    width: 25px;
+}
+::ng-deep .menu-title.plan-selected {
+    color: orange !important;
+    background-color: unset !important;
+}
+::ng-deep .sidebar-offcanvas .nav .nav-item:hover .nav-link .menu-title,::ng-deep .sidebar-offcanvas .nav .nav-item:hover .nav-link .menu-icon{
+    color: orange !important;
+    transition: .3s;
+}
+

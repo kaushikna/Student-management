@@ -1,0 +1,25 @@
+::ng-deep  .hello .ngx-pagination li{
+    border-radius: 50px;
+  }
+  ::ng-deep .hello .ngx-pagination li.current{
+    background-color: #0880e8;
+  }
+  ::ng-deep .hello .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+.question{
+  height: calc(100vh - 373px);
+  overflow-y: auto;
+}
+.question::-webkit-scrollbar {
+  width: 8px;
+}
+.question::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+.question::-webkit-scrollbar-thumb {
+  background: rgb(190, 190, 190); 
+  border-radius: 10px;
+}

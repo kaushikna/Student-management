@@ -1,0 +1,346 @@
+<div class="content-wrapper">
+  <dl-date-time-picker
+    startView="day"
+    maxView="year"
+    minView="minute"
+    minuteStep="5"
+    [(ngModel)]="selectedDate"
+>
+  </dl-date-time-picker>
+  <div class="row mb-3">
+    <div class="col-6">
+      <span class="page-title">Test Papers </span>
+    </div>
+    <div class="col-6">
+      <button (click)="addPaper()" class="btn btn-primary btn-sm pull-right ml-2">
+        + Paper
+      </button>
+      <select class="form-control-sm pull-right" (change)="onExamTypeChangeGlobal()" name="EntityType"
+        [(ngModel)]="entityType">
+        <option *ngFor="let option of entities" [value]="option.value">
+          {{ option.title }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row m-0">
+    <div class="col-sm-12 mb-2" *ngIf="showPaperFlag && addPaperFlag">
+      <div class="card">
+        <div class="card-header">Add Paper</div>
+        <div class="card-body">
+          <form (submit)="submitPaper()">
+            <div class="form-group col-md-4">
+              <label for="name">Name</label>
+              <input type="text" name="Subject Name" class="form-control" [(ngModel)]="paperModel.name" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="name">Exam Type</label>
+              <select class="form-control" (change)="onExamTypeChange()" name="Entity Type"
+                [(ngModel)]="paperModel.entityType">
+                <option *ngFor="let entity of entities" [value]="entity.value">
+                  {{ entity.title }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="name">Type</label>
+              <select class="form-control" name="Exam Type" [(ngModel)]="paperModel.type">
+                <option value="{{ testPaperType.value }}" *ngFor="let testPaperType of testPaperTypes">
+                  {{ testPaperType.title }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <button type="button" class="btn btn-primary" (click)="addsubPaper()">
+                + Subject
+              </button>
+              <br />
+              <br />
+              <div *ngFor="let sub of paperModel.subject; let i = index">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="subject">Subject</label>
+                      <select name="TestSubject{{ i }}" class="form-control" [(ngModel)]="sub.subjectId">
+                        <option value="">Select Subject</option>
+                        <option [value]="subject._id" *ngFor="let subject of subjects">
+                          {{ subject.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="time">Time</label>
+                      <input placement="bottom" name="TestTime{{ i }}" type="number" min="1" class="form-control"
+                        [(ngModel)]="sub.time" />
+                      <div class="well well-sm">HH:MM</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="time"></label>
+                      <button class="btn btn-primary" type="button" (click)="onDeleteSubPaper(i)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary ml-3" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 mb-2 p-0" *ngIf="!showPaperFlag && questionPaperFlag">
+      <div class="card">
+        <div class="card-header">Add Paper</div>
+        <div class="card-body">
+          <form [formGroup]="questionPapersForm" (ngSubmit)="questionPaperSubmit()">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="testName">Name of the Test Paper: </label>
+                  <select class="form-control" formControlName="paperId">
+                    <option value="{{ paper._id }}" *ngFor="let paper of papers">
+                      {{ paper.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Type</label>
+                  <select class="form-control" #selectList formControlName="type"
+                    (change)="pasageOption(selectList.value)">
+                    <option value="{{ option.id }}" *ngFor="let option of questionTypes">
+                      {{ option.value }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="passageFlag">
+              <div [formGroupName]="'passage'">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" #title class="form-control" formControlName="title" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="passageQuestion">Passage Questions</label>
+                      <input type="number" id="passageQuestion" class="form-control"
+                        (ngModelChange)="passageQuestions($event, title.value)" formControlName="passageQuestion" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="passageText">wysiwyg editor</label>
+                      <textarea [froalaEditor] formControlName="passageText" class="form-control" rows="10"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="subject">subject</label>
+                  <select id="subject" #selectsub class="form-control" formControlName="subjectId"
+                    (click)="subjectOption(selectsub.value)" disabled>
+                    <option value="{{ subject._id }}" *ngFor="let subject of subjects">
+                      {{ subject.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="testName">Category: </label>
+                  <!-- <input class="form-control" formControlName="paperId" required placeholder="" /> -->
+                  <select id="subCat" class="form-control" formControlName="subCat">
+                    <option value="{{ subcat }}" *ngFor="let subcat of subjectSubcat">
+                      {{ subcat }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-expansion-panel class="row border border-primary" id="mat{{ questionNo + 1 }}" *ngFor="
+                    let testPapersFormGroup of questionsFormArray['controls'];
+                    let questionNo = index
+                  " (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Question :
+                      <!-- Question : {{questionNo+1}} -->
+                    </mat-panel-title>
+                    <mat-panel-description> </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div [formGroup]="testPapersFormGroup">
+                    <app-question-panel id="qpanel{{ questionNo + 1 }}" [controlPath]="[
+                        'quetionType',
+                        'optionsType',
+                        'selectedOption',
+                        'resultOption',
+                        'questionTypeId',
+                        'image'
+                      ]" [testPapersFormGroup]="testPapersFormGroup" [question]="question"
+                      [questionNo]="questionNum + questionNo">
+                    </app-question-panel>
+                  </div>
+                </mat-expansion-panel>
+              </div>
+            </div>
+            <br />
+            <!-- <button class="btn btn-primary" type="submit" [disabled]="!questionPapersForm.valid"> Submit </button> -->
+            <button class="btn btn-primary" type="submit" *ngIf="questionPaperEditFlag">
+              Update and Next
+            </button>
+            <button class="btn btn-primary" type="submit" *ngIf="!questionPaperEditFlag">
+              Save and Next
+            </button>
+          </form>
+        </div>
+        <div class="card-footer" *ngIf="this.questionPaperEditFlag">
+          <button (click)="filteredQuestions(i)" *ngFor="let i of paginationQuestions">
+            {{ i + 1 }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 events-table stretch-card">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <th>S.NO</th>
+            <th>Paper</th>
+            <th>Exam Type</th>
+            <th>Type</th>
+            <th>Subjects</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+                      let paper of papers | paginate: paginationConfig;
+                      let i = index
+                    ">
+              <td>
+                {{
+                (paginationConfig.currentPage - 1) *
+                paginationConfig.itemsPerPage +
+                (i + 1)
+                }}
+              </td>
+              <td>{{ paper.name }}</td>
+              <td>{{ paper.entityType }}</td>
+              <td>{{ paper.type }}</td>
+              <td class="d-flex">
+                  <tr *ngFor="let subject of paper.subject">
+                     <td >{{ subject.subjectId?.name }}</td>
+              <td *ngIf="!paper.attempts">
+                <button (click)="addQuestion(paper, subject.subjectId)" class="btn btn-primary btn-sm mr-2">
+                  +
+                </button>
+                <button (click)="editQuestion(paper, subject.subjectId)" class="btn btn-primary btn-sm">
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </td>
+            </tr>
+            </td>
+            <td>
+              <button (click)="onPreview(paper)" class="btn btn-sm btn-dark mr-2">
+                Preview
+              </button>
+              <button *ngIf="!paper.publish" (click)="publishPaper(paper)" class="btn btn-sm btn-primary mr-2">
+                Publish
+              </button>
+              <label *ngIf="paper.publish" class="mr-2">Published</label>
+              <button (click)="changeTestPaperDisabledStatus(paper._id, false)" *ngIf="paper.is_disabled" type="button"
+                class="btn btn-sm btn-success" style="margin-right: 10px">
+                Enable
+              </button>
+
+              <button (click)="changeTestPaperDisabledStatus(paper._id, true)" class="btn btn-sm btn-primary mr-2"
+                type="submit" *ngIf="!paper.is_disabled">
+                Disable
+              </button>
+
+              <button (click)="deleteTestpaper(paper)" class="mr-1 btn btn-sm btn-danger">
+                <i class="fa fa-trash"></i>
+              </button>
+              <button *ngIf="paper.attempts > 0" (click)="showAttemptedList(paper)" type="button"
+                class="btn btn-primary btn-sm">
+                Attempted <span class="badge badge-light">{{paper.attempts}}</span>
+              </button>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls id="paginationListId" class="my-pagination" (pageChange)="pageChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal HTML -->
+<div id="deleteModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column bg-white">
+        <div class="icon-box">
+          <i class="mdi mdi mdi-close"></i>
+        </div>
+        <h4 class="modal-title w-100">Delete record?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure that you want to permanently delete the selected record?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onDeleteCancel()">No</button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal HTML -->
+<div id="viewStudentsModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column bg-white">
+        <h4 class="modal-title w-100">Students</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <th>S.NO</th>
+            <th>Name of the Student</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students;let i = index">
+              <td class="fcell">{{i+1}}</td>
+              <td class="fcell">{{student.fullName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onCancelViewStudents()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,41 @@
+.breadcrumbs{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.breadcrumbs a{
+    font-size: 15px;
+    color: #6b6969;
+}
+.breadcrumbs i{
+    font-size: 12px;
+    color: #6b6969;
+}
+.heading{
+    color: #f6b024;
+    font-size: 30px;
+    font-weight: 600;
+}
+.data-field{
+    margin: 10px 0;
+}
+.data-field .title{
+    color: #252629;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.data-field .data,.data-field .data a{
+    font-size: 15px;
+    color: #919293;
+    font-weight: 400;
+}
+.data-field .data a{
+    text-decoration: underline;
+}
+.data-field .image-card{
+    padding: 25px 0;
+}
+.data-field .image-card img{
+    width: 100px;
+}

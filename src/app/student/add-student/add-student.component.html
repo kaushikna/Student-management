@@ -1,0 +1,282 @@
+<form [formGroup]="form" (ngSubmit)="onSaveStudent()" *ngIf="form">
+
+  <h6>Student Information</h6>
+  <hr />
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label for="grade" class="col-sm-5 col-form-label text-left">Grade
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <select class="form-control" formControlName="grade"
+            [ngClass]="{ 'is-invalid': submitted && f.grade.errors }">
+            <option value="">Select</option>
+            <option class="dropdown-content" *ngFor="let option of grades" [value]="option.value"> {{ option.value }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+            <div *ngIf="f.grade.errors.required">Grade Name is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">First Name
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            <div *ngIf="f.firstName.errors.minlength">First Name should be minimum of 3 characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Last Name
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            <div *ngIf="f.lastName.errors.minlength">Last Name should be minimum of 3 characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Email
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="email" placeholder="Email"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Phone
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input type="phone" class="form-control" [appPhone] formControlName="mobileNo" placeholder="Phone"
+            [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+          <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+            <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+            <div *ngIf="f.mobileNo.errors.minlength">Mobile No must be 10 Digits</div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Date Of Birth
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input type="date" class="form-control" [max]="today" name="dateOfBirth" formControlName="dateOfBirth"
+            [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" />
+          <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback">
+            <div *ngIf="f.dateOfBirth.errors.required">Date Of Birth is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group-row" *ngIf="preview1 && preview1 !== null">
+        <div class="preview col-sm-8">
+          <img [src]="preview1" [alt]="form.value.name">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-5 col-form-label">Upload Picture </label>
+        <div class="col-sm-7">
+          <input class="text-overflow" type="file" #profilePicInput name="avatar" accept="image/*"
+            (change)="uploadFile($event)">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Gender
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <select class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+            formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value='male'>Male</option>
+            <option value='female'>Female</option>
+            <option value='other'>Other</option>
+          </select>
+          <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+            <div *ngIf="f.gender.errors.required">Gender is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Address
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <textarea rows="3" class="form-control" autocomplete="off" formControlName="address" placeholder="Address"
+            [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Address is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+
+
+
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Country
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <select class="form-control" (change)="onCountryChange($event)" autocomplete="off" formControlName="country"
+            [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+            <option class="dropdown-content" *ngFor="let country of countries" [value]="country.value"> {{ country.title
+              }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+            <div *ngIf="f.country.errors.required">Country is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">State
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7" *ngIf="!statesLoading">
+          <select class="form-control" (change)="onStateChange($event)" autocomplete="off" formControlName="state"
+            [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+            <option class="dropdown-content" value="">Select State</option>
+            <option class="dropdown-content" *ngFor="let state of states" [value]="state.name"> {{ state.name }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors.required">State is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">City
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7" *ngIf="!citiesLoading">
+          <select class="form-control" formControlName="city" autocomplete="off"
+            [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+            <option class="dropdown-content" value=""> Select City</option>
+            <option class="dropdown-content" *ngFor="let city of cities" [value]="city.name"> {{ city.name }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required">City is required</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="fname" class="col-sm-5 col-form-label">Zip
+          <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+          <input class="form-control" formControlName="zip" autocomplete="off" placeholder="Zip"
+            [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" />
+          <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+            <div *ngIf="f.zip.errors.required">Zip is required</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <h6 class="mt-3">Parent/Guardian Details</h6>
+  <hr>
+  <div [formGroup]="form.controls.parent">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label for="fname" class="col-sm-5 col-form-label">First Name</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" name="Parent First Name" formControlName="firstName"
+              placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.parent.controls.firstName.errors }" />
+            <div *ngIf="submitted && f.parent.controls.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.parent.controls.firstName.errors.required">First Name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="fname" class="col-sm-5 col-form-label">Last Name</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+              [ngClass]="{ 'is-invalid': submitted && f.parent.controls.lastName.errors }" />
+            <div *ngIf="submitted && f.parent.controls.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.parent.controls.lastName.errors.required">Last Name is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label for="fname" class="col-sm-5 col-form-label">Email</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" formControlName="email" placeholder="Email"
+              [ngClass]="{ 'is-invalid': submitted && f.parent.controls.email.errors }" />
+            <div *ngIf="submitted && f.parent.controls.email.errors" class="invalid-feedback">
+              <div *ngIf="f.parent.controls.email.errors.required">Email is required</div>
+              <div *ngIf="f.parent.controls.email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label for="fname" class="col-sm-5 col-form-label">Phone</label>
+          <div class="col-sm-7">
+            <input type="phone" class="form-control" [appPhone] formControlName="mobileNo" placeholder="Phone"
+              [ngClass]="{ 'is-invalid': submitted && f.parent.controls.mobileNo.errors }" />
+            <div *ngIf="submitted && f.parent.controls.mobileNo.errors" class="invalid-feedback">
+              <div *ngIf="f.parent.controls.mobileNo.errors.required">Mobile No is required</div>
+              <div *ngIf="f.parent.controls.mobileNo.errors.minlength">Mobile No must be 10 Digits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="grade" class="col-sm-5 col-form-label text-left"></label>
+    <div class="col-sm-7 text-right">
+      <button class="btn btn-primary" [disabled]="!isDataLoaded" >{{buttonText}}</button>
+    </div>
+  </div>
+
+</form>

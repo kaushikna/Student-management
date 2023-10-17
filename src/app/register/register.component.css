@@ -1,0 +1,57 @@
+img {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+  }
+
+
+  .page-body-wrapper{
+    margin-top: -64px;
+    position: relative;
+    z-index: 9999;
+    padding-top:64px;
+    padding-bottom:0px;
+    margin-bottom:0px;
+    background-color: #f0f1f6 !important;
+}
+
+body{
+    background-color: #f0f1f6 !important;
+}
+
+.auth-form-light{
+    border-top:10px solid #0880e8;
+    border-radius:5px;
+    padding:20px;
+}
+
+.auth .brand-logo{
+    margin-bottom: 20px !important;
+}
+
+.auth form .form-group{
+    margin-bottom: 15px !important;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+
+.preview{
+    height: 60px !important;
+}
+
+.preview img{
+    max-height: 100% !important;
+}
+
+
+.content-wrapper {
+    background-image: url(https://examprephub.flipdiary.com/v4/assets/img/account-type-bg.jpg) !important;
+    background-size: cover !important;
+    display: table !important;
+    width: 100% !important;
+    height: 100vh !important;
+}

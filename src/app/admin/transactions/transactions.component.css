@@ -1,0 +1,3 @@
+.no-wrap th, .no-wrap td{
+    white-space: nowrap;
+}

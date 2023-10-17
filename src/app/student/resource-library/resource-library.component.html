@@ -1,0 +1,308 @@
+<div class="content-wrapper">
+  <div class="resource-library">
+    <div class="row mb-2 ">
+      <div class="col-md-8">
+        <h3 class="page-title">
+          Resource Library
+          <button
+            (click)="openAddResource()"
+            *ngIf="addButton"
+            class="btn btn-primary btn-rounded btn-fw ml-10"
+          >
+            Add Resource
+          </button>
+        </h3>
+      </div>
+      <div class="col-md-2 text-right">
+        <div class="form-group mb-2" *ngIf="entitiesFlag">
+          <select
+            class="form-control"
+            name="Entity Type Global"
+            (change)="refreshData()"
+            [(ngModel)]="entityType"
+          >
+            <option
+              *ngFor="let resourceType of entities"
+              [value]="resourceType.value"
+            >
+              {{ resourceType.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2 text-right">
+        <div class="form-group mb-2">
+          <label for="searchresource" class="sr-only">Search</label>
+          <input
+            type="search"
+            autocomplete="off"
+            class="form-control"
+            placeholder="Search"
+            name="searchText"
+            (input)="loadData()"
+            [(ngModel)]="searchQuery"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 resource-tiles">
+      <div
+        class="col-md-3"
+        *ngFor="let resource of resources | paginate: paginationConfig"
+      >
+        <div class="white-tile">
+          <div class="row border-bottom pb-2 white-tile-head">
+            <div class="col-8">
+              <h4>{{ resource.subject }}</h4>
+            </div>
+            <div class="col-4 ft-12 text-right text-dark">
+              <small *ngIf="resource.edit" class="ml-2">
+                <button
+                  class="btn btn-sm btn-light"
+                  (click)="openEditResource(resource)"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </small>
+              <small *ngIf="resource.delete" class="ml-2">
+                <button
+                  class="btn btn-sm btn-light"
+                  (click)="openDeleteResource(resource)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </small>
+            </div>
+          </div>
+
+          <div class="white-tile-body">
+            <h5>{{ resource.title }}</h5>
+            <p class="rich-text" [innerHTML]="resource.overview"></p>
+            <p>{{ resource.chaptersCount }} Chapters</p>
+          </div>
+
+          <div class="white-tile-footer">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="onClickViewResource(resource)"
+            >
+              VIEW DETAILS
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="my-3">
+      <pagination-controls
+        id="paginationListId"
+        class="my-pagination"
+        (pageChange)="pageChange($event)"
+      >
+      </pagination-controls>
+    </nav>
+  </div>
+</div>
+
+<app-smart-modal2 #modal1 [modalConfig]="addResourceConfig">
+  <form (submit)="createResource()">
+    <div class="row mb-3 mx-0 mt-3 px-2">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Exam Type<span class="text-danger">*</span></label>
+          <select
+            class="form-control form-control-sm"
+            name="Entity Type"
+            (change)="onExamTypeChange()"
+            [(ngModel)]="resourceModel.entityType"
+          >
+            <option
+              *ngFor="let resourceType of entities"
+              [value]="resourceType.value"
+            >
+              {{ resourceType.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group" *ngIf="subjects.length">
+          <label>Subject<span class="text-danger">*</span></label>
+          <select
+            class="form-control form-control-sm"
+            name="Resource Subject"
+            [(ngModel)]="resourceModel.subjectId"
+          >
+            <option *ngFor="let subject of subjects" [value]="subject._id">
+              {{ subject.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Title<span class="text-danger">*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="resourceModel.title"
+            name="Resource Title"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 mx-0 px-2">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Overview<span class="text-danger">*</span></label>
+          <angular-editor
+            [placeholder]="'Enter text here...'"
+            name="Resource Overview"
+            [(ngModel)]="resourceModel.overview"
+          ></angular-editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 mx-0 px-2">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Syllabus<span class="text-danger">*</span></label>
+          <angular-editor
+            [placeholder]="'Enter text here...'"
+            name="Resource Syllabus"
+            [(ngModel)]="resourceModel.syllabus"
+          ></angular-editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 mx-0 px-2">
+      <div class="col-md-12">
+        <button type="submit" style="width: 100px;" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</app-smart-modal2>
+
+<app-smart-modal2 #modal2 [modalConfig]="editResourceConfig">
+  <form (submit)="editResource()">
+    <div class="row mb-3 mt-3 mx-0 px-1">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Exam Type<span class="text-danger">*</span></label>
+          <select
+            class="form-control form-control-sm"
+            name="Resource Entity Type"
+            (change)="onExamTypeChange()"
+            [(ngModel)]="resourceModel.entityType"
+          >
+            <option
+              *ngFor="let resourceType of entities"
+              [value]="resourceType.value"
+            >
+              {{ resourceType.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Subject<span class="text-danger">*</span></label>
+          <select
+            class="form-control form-control-sm"
+            name="Resource Subject"
+            [(ngModel)]="resourceModel.subjectId"
+          >
+            <option *ngFor="let subject of subjects" [value]="subject._id">
+              {{ subject.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Title<span class="text-danger">*</span></label>
+          <input
+            type="text"
+            [(ngModel)]="resourceModel.title"
+            name="Resource Title"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 mx-0 px-1">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Overview<span class="text-danger">*</span></label>
+          <angular-editor
+            [placeholder]="'Enter text here...'"
+            name="Resource Overview"
+            [(ngModel)]="resourceModel.overview"
+          ></angular-editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 mx-0 px-1">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Syllabus<span class="text-danger">*</span></label>
+          <angular-editor
+            [placeholder]="'Enter text here...'"
+            name="Resource Syllabus"
+            [(ngModel)]="resourceModel.syllabus"
+          ></angular-editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 mx-0 px-1">
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary" style="width: 100px;">Update</button>
+      </div>
+    </div>
+  </form>
+</app-smart-modal2>
+
+<!-- Modal HTML -->
+<div id="deleteModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column bg-white">
+        <div class="icon-box">
+          <i class="mdi mdi mdi-close"></i>
+        </div>
+        <h4 class="modal-title w-100">Delete Item?</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure that you want to permanently delete the selected record?
+        </p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onDeleteCancel()"
+        >
+          No
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onDeleteConfirm()"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

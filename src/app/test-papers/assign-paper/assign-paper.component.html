@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+      <div class="assign">
+        <select class="form-control-md" (change)="onExamTypeChange()" name="EntityType" [(ngModel)]="entityType">
+          <option *ngFor="let option of entities" [value]="option.value">{{option.title}}</option>
+        </select>
+
+        <app-dropdown-search *ngIf="papers && papers.length" [selectedValue]="TestPaperId" [filterLabel]="'Testpaper'"
+          [filterListener]="filterTrigger" [filterDisplayKey]="'name'" [filterValueKey]="'name'"
+          [filterKey]="'Testpaper'" [options]="papers" (filterSelected)="applySelectedOption($event)"
+          (filterClicked)="onFilterClicked($event)">
+        </app-dropdown-search>
+
+        <app-dropdown-search *ngIf="batches && batches.length" [selectedValue]="BatchId" [filterLabel]="'Batch'"
+          [filterListener]="filterTrigger" [filterDisplayKey]="'batchName'" [filterValueKey]="'batchName'"
+          [filterKey]="'Batch'" [options]="batches" (filterSelected)="applySelectedOption($event)"
+          (filterClicked)="onFilterClicked($event)">
+        </app-dropdown-search>
+        <button [disabled]="!TestPaperId && !BatchId" (click)="addStudentOrBatchToTestPaper($event.target.value)"
+          class="btn btn-primary" style="margin-right: 10px;"> Assign</button>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 grid-margin stretch-card events-table">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Testpaper</th>
+              <th>Status</th>
+              <th>Batch</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of list | paginate: paginationConfig">
+              <td>{{item.name}}</td>
+              <td>{{item.status}}</td>
+              <td [ngClass]="item.batch.plan === 2? 'text-primary':''" (click)="viewStudents(item.batch._id)">
+                {{item?.batchName}}</td>
+              <td>
+                <button (click)="onClickDeassign(item)" class="btn btn-danger" style="margin-right: 10px;">
+                  DeAssign</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls id="paginationListId" class="my-pagination" (pageChange)="pageChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal HTML -->
+<div id="viewStudentsModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column bg-white">
+        <h4 class="modal-title w-100">Students</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <th>S.NO</th>
+            <th>Name of the Student</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of studentList;let i = index">
+              <td class="fcell">{{i+1}}</td>
+              <td class="fcell">{{student.fullName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onCancelViewStudents()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal HTML -->
+<div id="deleteModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column bg-white">
+        <div class="icon-box">
+          <i class="mdi mdi mdi-close"></i>
+        </div>
+        <h4 class="modal-title w-100">Deassign?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure that you want to deassign the testpaper?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onDeleteCancel()">No</button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

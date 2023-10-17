@@ -1,0 +1,29 @@
+<div class="content-wrapper">
+  <h3 class="page-title mb-4">Test Papers: {{currentTestObj?.name}}</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div *ngIf="currentTestObj">
+          <div class="col-md-12" *ngFor="let subject of currentTestObj.subject">
+            <div class="card bg-light mb-3">
+              <div class="card-header">{{subject?.subjectId?.name}} Test Directions</div>
+              <div class="card-body">
+                <h5 class="card-title">You will have {{subject?.time}} minutes to complete this section</h5>
+                <p>SECTION DIRECTIONS: The first screen in this section contains instructions about the test. This
+                  screen is not part of the scored questions.</p>
+                <p>You may use controls like Prev, Next to navigate the questions anytime. Also you can pause the exam
+                  and resume anytime for limited minutes. If you want to End the section, you can use the End Section
+                  button on header.</p>
+                <p>Click on <strong>Start Now</strong> button to proceed.</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-12 text-center">
+            <button (click)="startTest()" class="start-btn btn btn-primary btn-lg">Start Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

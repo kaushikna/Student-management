@@ -1,0 +1,123 @@
+<div class="paymentmethod">
+    <div class="pay">
+        <div class="my-3 d-flex align-items-center justify-content-between">
+            <h2>Payment Method</h2>
+            <button class="btn btn-primary" (click)="newpayment()">Add New Card</button>
+        </div>
+        <div>
+            <span>Payment</span>
+            <div class="select">
+                <select class="form-control" formControlName="grade">
+                    <option value="">8668</option>
+                </select>
+                <div class="visa">
+                    <img src=",,/../../../assets/images/visa.svg" />
+                </div>
+            </div>
+            <a (click)="Removepayment()">Remove</a>
+            <div class="learnmore">
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="choosepayment" role="dialog">
+    <div class="modal-dialog modal-dialog-centered removepayment">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body set-payment">
+                <form class="mb-3">
+                    <h6 class="heading">Choose Payment Type</h6>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="d-flex my-3" style="gap: 10px;">
+                                <div class="add-card card-set">
+                                    <img src="../../assets/images/visa.svg" alt="">8668
+                                </div>
+                                <div class="card-set-plus close" data-dismiss="modal" (click)="Card()">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Card" role="dialog">
+    <div class="modal-dialog modal-dialog-centered removepayment">
+        <div class="modal-content ">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h6 class="heading">Card</h6>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 py-1">
+                            <label for="fname" class="col-form-label">Name on Card</label>
+                            <input type="text" class="form-control" formControlName=">Name on Card"
+                                placeholder="Name on Card" />
+                        </div>
+                        <div class="col-sm-12 py-1">
+                            <label for="fname" class="col-form-label">Card Number</label>
+                            <input type="text" class="form-control" formControlName="Card Number"
+                                placeholder="Card Number" />
+                        </div>
+                        <div class="col-sm-6 py-1">
+                            <label for="fname" class="col-form-label">CVV</label>
+                            <input type="password" class="form-control" formControlName="CVV" placeholder="CVV" />
+                        </div>
+                        <div class="col-sm-6 py-1">
+                            <label for="fname" class="col-form-label">Billing Zip Code</label>
+                            <input type="number" class="form-control" formControlName="Billing Zip Code"
+                                placeholder="Billing Zip Code" />
+                        </div>
+                    </div>
+
+                </form>
+                <div class="semi-footer">
+                    <p>By Continuing, I allow to save my payment instrument information for future transaction purusunet
+                        to the <a href="">Payment Terms for service</a></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start p-3 modal-footer">
+                <button class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="removepayment" role="dialog">
+    <div class="modal-dialog removepayment">
+        <div class="modal-content">
+            <div class="modal-header bg-white">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h6 class="heading">Remove payment method</h6>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>This will remove your payment method all learning access. if this payment method is used for a service or subscription ,it will remain active.mange your payment method by going to your subject service or subscription page.</span>
+                            </div>
+                            <h5 class="span my-3">Are you sure want to remove this payment method?</h5>
+                            <h5 class="txt1 my-3">VISA 8668</h5>
+                            <div class="mb-2 mt-3"><button class="btn btn-primary" style="font-size: 16px;">Yes, Remove</button></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

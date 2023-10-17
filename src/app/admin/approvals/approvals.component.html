@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h3 class="page-title">Approvals</h3>
+    </div>
+  </div>
+
+  <div class="row mx-0">
+    <div class="col-lg-12 grid-margin stretch-card px-3">
+      <ul class="nav nav-tabs tab-transparent" role="tablist">
+        <li class="nav-item waves-effect waves-light">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="false">Parent Approvals List</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered testpapers-subjectlist">
+              <thead>
+                <th>User</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let approval of approvals; let i = index">
+                  <td>{{ approval.firstName + " " + approval.lastName }}</td>
+                  <td>{{ approval.status }}</td>
+                  <td>
+                    <button class="btn btn-small btn-primary" (click)="approveParent(approval._id)">Approve</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

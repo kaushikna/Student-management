@@ -1,0 +1,95 @@
+
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+<div class="content-wrapper d-flex align-items-center auth">
+    <div class="row flex-grow">
+
+
+
+
+        <!-- Right Column -->
+        <div class="col-md-5 mx-auto">
+            <div class="auth-form-light">
+                    <h1 class="logo mr-auto text-center"><a class="navbar-brand brand-logo nav-link pl-0 ml-0 scrollto">
+                        <img alt="ExamPrepHub" src="../../assets/images/Examprephub.jpg" width="50%"/>
+                    </a></h1>
+              <!--  <h4 class="display-5">Login to your account</h4>-->
+               
+
+                <form class="mt-5" [formGroup]="form" (ngSubmit)="onLogin()">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 mt-10">I am a</label>
+
+                            <select class="form-control col-md-8"
+                                [ngClass]="{ 'is-invalid': f.role.invalid && (f.role.dirty || f.role.touched)}"
+                                name="role" id="role" formControlName="role">
+                                <option value="">Select Role</option>
+                                <option class="dropdown-content" *ngFor="let option of roles" [value]="option.value">
+                                    {{ option.title }}</option>
+                            </select>
+
+                            <div *ngIf="f.role.invalid && (f.role.dirty || f.role.touched)" class="invalid-feedback">
+                                <div *ngIf="f.role.errors.required">
+                                    Role is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 mt-10">Email</label>
+                            <input type="email" autocomplete="off" class="form-control col-md-8" id="email"
+                                placeholder="Enter Email" formControlName="userName"
+                                [ngClass]="{ 'is-invalid': f.userName.touched && f.userName.invalid }" required />
+
+                            <div *ngIf="f.userName.invalid && (f.userName.dirty || f.userName.touched)"
+                                class="invalid-feedback offset-4 col-md-8">
+                                <div *ngIf="f.userName.errors.required">
+                                    Email is required.
+                                </div>
+                                <div *ngIf="f.userName.errors.email">
+                                    Invalid Email
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 mt-10">Password</label>
+                            <input type="password" value="Password" id="password" placeholder="Enter Password"
+                                [ngClass]="{ 'is-invalid': f.password.touched && f.password.invalid }" name="password"
+                                class="form-control col-md-8" formControlName="password">
+                            <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
+                                class="invalid-feedback offset-4 col-md-8">
+                                <div *ngIf="f.password.errors.required">
+                                    Password is required.
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="offset-4">
+                                <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-rounded btn-fw mr-2">LOGIN</button>
+                                <a [routerLink]="['/forgot']" class="font-weight-normal">Forgot Password?</a>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row mt-5">
+<div class="offset-4">
+        <p class="text-center">Don't have account? <a (click)="onSignup($event)" class="cp text-primary font-weight-bold">Signup
+                Here</a></p>
+</div>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+/* img {
+  display: block;
+  max-width:200px;
+  max-height:40px;
+  width: auto;
+  height: auto;
+} */
+/* .img-thumbnail{
+  border: none;
+} */
+.profile-pic {
+  font-size: 13px;
+
+}
+::ng-deep .sidebar{
+  background: white;
+  padding-top: 25px;
+}
+::ng-deep .navbar-brand-wrapper{
+  background: white !important;
+}
+.navbar .navbar-brand-wrapper .navbar-brand{
+  color: black !important;
+}
+::ng-deep .sidebar .nav-item .nav-link .icon-bg .menu-icon{
+  color: #6a6a6a !important;
+}
+::ng-deep .sidebar .nav .nav-item .nav-link .menu-title{
+  color: #6a6a6a;
+  font-size: 16px;
+}
+::ng-deep .sidebar .nav .nav-item:hover{
+  background-color: transparent;
+}

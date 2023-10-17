@@ -1,0 +1,221 @@
+<div class="content-wrapper test-paper-results-details" *ngIf="testResult">
+
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h3 class="page-title post-badge">
+                <a href="#" class="text-dark cp">
+                    <strong><a routerLink="/admin/results">Test Papers</a></strong>
+                </a>
+                <small class="pl-2 pr-2 ft-12">>></small> <small>{{testResult?.name}}</small>
+            </h3>
+        </div>
+
+        <div class="col-md-4 text-right">
+            <strong class="badge badge-dark ft-24">{{testResult.correct}}/{{testResult.totalQuestion}} </strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-bod">
+                    <div class="flex-row bd-highlight d-flex justify-content-between align-items-center px-3 py-2">
+                        <div class="bd-highlight pr-3"><strong class="heading-cls post-1">{{testResult?.name}}</strong>
+                        </div>
+                        <div class="bd-highlight pr-3 ft-13"><strong>Completed On: </strong> {{testResult?.createdAt |
+                            date:'dd-MM-yyyy'}}</div>
+                        <div class="bd-highlight pr-3 ft-13"><strong>Duration: </strong>{{testResult.hours}} Min</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                        <li ngbNavItem *ngFor="let tab of tabs;let i = index" (click)="onTabClick(i)">
+                            <a ngbNavLink>{{tab}}</a>
+                            <ng-template ngbNavContent *ngIf="i === 0">
+
+                                <div class="tab-pane fade active show" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div class="bg-light p-3 rounded">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row ft-15">
+                                                    <div class="col-md-4">
+                                                        <strong class="text-success">Correct:
+                                                            {{testResult.correct}}</strong>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <strong class="text-danger">In Correct:
+                                                            {{testResult.wrong}}</strong>
+                                                    </div>
+                                                    <!-- <div class="col-md-4">
+                                                        <strong class="text-warning">Blank: 9</strong>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <button class="btn btn-sm btn-dark" (click)="view = 0"><i
+                                                        class="mdi mdi-format-list-bulleted"></i></button>
+                                                <button class="btn btn-sm btn-dark ml-1" (click)="view = 1"><i
+                                                        class=" mdi mdi-chart-bar-stacked"></i></button>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4" *ngIf="view === 0">
+                                        <div class="col-md-6 mb-4" *ngFor="let subject of testResult.subject">
+
+                                            <div class="bg-light p-4 border rounded">
+                                                <div class="row">
+                                                    <div class="col-md-6 text-primary"><i
+                                                            class="mdi mdi-book-open-variant mr-1"></i> <strong
+                                                            class="ft-15">{{subject.name}}</strong></div>
+                                                    <div class="col-md-6 text-right ft-12">
+                                                        <strong>Duration:</strong> {{subject.time}} Minutes
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row ft-13 pt-2">
+                                                    <div class="col-md-6 border-right">
+
+                                                        <p><strong>Total Questions:</strong>{{subject.totalQuestion}}
+                                                        </p>
+                                                        <p><strong>Correct:</strong> {{subject.correctMarks}}</p>
+                                                        <p><strong>In Correct:</strong> {{subject.totalQuestion -
+                                                            subject.correctMarks}}</p>
+                                                        <!-- <p><strong>Blank:</strong> 20</p> -->
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <p *ngFor="let subcat of subject.subcats">
+                                                            <strong>{{subcat.key}}:</strong> {{subcat.percentage}}%
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-4" *ngIf="view === 1">
+                                        <div class="col-6">
+                                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                                [options]="barChartOptions" [plugins]="barChartPlugins"
+                                                [legend]="barChartLegend" [chartType]="barChartType">
+                                            </canvas>
+                                        </div>
+                                        <div class="col-6">
+                                            <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2"
+                                            [options]="barChartOptions2" 
+                                            [legend]="barChartLegend2" [chartType]="barChartType2">
+                                        </canvas>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </ng-template>
+                            <ng-template ngbNavContent *ngIf="i !== 0">
+                                <div class="bg-light p-3 rounded">
+                                    <div class="row pl-4">
+
+
+                                        <div class="pr-4"><strong>Subject:</strong> {{testResult.subject[i-1].name}}</div>
+                                        <div class="pr-4"><strong>Duration:</strong> {{testResult.subject[i-1].time}}Min</div>
+                                        <div class="pr-4"><strong>Total Marks:</strong> {{testResult.subject[i-1].totalQuestion}}</div>
+                                        <div class="pr-4"><strong class="text-success">Correct:</strong> {{testResult.subject[i-1].correctMarks}}</div>
+                                        <div class="pr-4"><strong class="text-danger">InCorrect:</strong> {{testResult.subject[i-1].totalQuestion -
+                                            testResult.subject[i-1].correctMarks}}</div>
+
+                                    </div>
+                                    <hr>
+                                    <div class="row question-panel">
+                                        <div class="col-6 p-4 left">
+                                            <ng-container *ngIf="question.type === 1">
+                                            {{question?.passage}}
+                                            <div [innerHTML]="question.passageText"></div>
+
+                                            </ng-container>
+                                            <ng-container *ngIf="question.type !== 1">
+                                                {{question?.question}}
+
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row p-4" *ngIf="question.passage">
+                                                {{ question?.question}}
+                                            </div>
+                                            <ul class="row p-4 vertical options">
+                                                <li *ngFor="let option of question.options">
+                                                    <div class="options_left">
+                                                        <span class="label">
+                                                            <span *ngIf="option.answered === 1" class=" text-success">
+                                                                Correct
+                                                            </span>
+                                                            <span *ngIf="option.answered === -1" class="text-danger">
+                                                                In Correct
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="options_right">
+                                                        <div class="radio">
+                                                            <div *ngIf="option.answered === 1" class="inner bg-success"></div>
+                                                            <div *ngIf="option.answered === -1" class="inner bg-danger"></div>
+                                                        </div>
+                                                        <div class="options_right_content pl-2" [class.text-success]="option.correct === 1">
+                                                            <ng-container [ngSwitch]="option.entryType">
+                                                                <ng-container *ngSwitchCase="'0'">
+                                                                    {{option.entryText}}
+                                                                </ng-container>
+                                                                <ng-container *ngSwitchCase="'1'">
+                                                                    <img  class="option-image" [src]="option.entryImage" />
+                                                                </ng-container>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                   
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2 p-2">
+                                        <span class="question-no text-white" [class.bg-success]="questionItem.correct" [class.bg-danger]="!questionItem.correct" [class.selected]="question.index === i"
+                                            (click)="onClickQuestion(i)" 
+                                            *ngFor="let questionItem of questions;let i = index">
+                                            {{i+1}}
+                                        <span *ngIf="question.index === i" class="selected_arrow"></span>
+                                            
+                                        </span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loader" *ngIf="loading"></div>
+
+</div>

@@ -1,0 +1,106 @@
+#subjectsTab{
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-link.active{
+    padding: 10px 15px !important;
+    border-bottom: 0;
+    color: #f6b024 !important;
+    font-size: 20px !important;
+}
+.nav-link.active:after{
+    content: unset !important;
+}
+.pull-right{
+    list-style: none;
+}
+input,select{
+    background-color: white;
+    font-size: 16px;
+}
+.events-table{
+    background-color: #fff !important;
+}
+.table-bordered td, .table-bordered th{
+    border: 0;
+}
+.table-bordered{
+    /* border: 1px solid rgb(227, 227, 227); */
+  font-family: 'Nunito Sans', sans-serif;
+  border: 0 !important;
+
+}
+.stretch-card{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 0;
+}
+.page-title{
+    padding: 15px;
+    font-weight: 600;
+    font-size: 19.3px;
+    border-radius: 10px 10px 0 0;
+    background-color: white;
+}
+.table-bordered tr td, .table-bordered thead{
+    border-bottom: 1px solid rgb(227, 227, 227);
+}
+::ng-deep .table-bordered thead th{
+    background-color: #fff;
+    color: #8898aa;
+    font-size: 11.7px !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.table-bordered thead{
+    border-top: 1px solid rgb(227, 227, 227);
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+.events-table td{
+    font-size: 14px; 
+    font-weight: 500;
+}
+
+.modal-header{
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+}
+.modal-header h4{
+    font-size: 25px;
+    font-weight: 600;
+    color: #f6b024 !important;
+}
+.modal-header button{
+    color: black;
+    opacity: 1;
+}
+.modal-body,.modal-footer{
+    background-color: white;
+    padding: 0;
+}
+.modal-footer{
+    padding: 15px;
+}
+.modal-footer button{
+    padding: 7px 15px;
+    width: 100px;
+    height: 39px;
+}
+::ng-deep .modal-content{
+    border: 0;
+}
+
+
+.type{
+    padding: 15px 0;
+}
+.add-scroll{
+    height: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+}

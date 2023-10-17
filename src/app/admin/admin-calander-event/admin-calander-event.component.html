@@ -1,0 +1,117 @@
+
+
+<button class="btn btn-primary pull-right" (click)="addNewevnts()">
+  Add new
+</button>
+
+  <ng-template #viewevents let-close="close">
+    <div class="modal-header bg-white">
+      <h5 class="modal-title" style="color: #f6b024;">Event Details</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+      <div>
+        Event:
+        <pre>{{ displayEvent | json }}</pre>
+      </div>  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #AddnnewEvents let-close="close">
+    <div class="modal-header bg-white">
+      <h5 class="modal-title fw-bold" style="color: #f6b024;">Schedule Meeting</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal_box">
+      <div class="d-flex my-3 align-items-center">
+        <label class="lable_theme_two" for="">Topic</label>
+        <input type="text" placeholder="Math Class" class="" style="width: 100%;">
+      </div>
+      <div class="d-flex my-3 align-items-center">
+        <label for=""  class="lable_theme_two">metting Url</label>
+        <textarea class="" name="meetting" id="" cols="20" rows="5" style="width: 100%;"></textarea>
+      </div>
+      <div class="d-flex my-3 align-items-center">
+        <label class="lable_theme" for="">When</label>
+        <div class=" gap wen_part">
+          <div>
+            <input type="date" class="input_theme">
+          </div>
+          <div>
+            <input type="time" name="" id="" class="input_theme">
+          </div>
+          <div>
+            <select name="" id="" class=" input_theme">
+              <option value="1">PM</option>
+              <option value="2">AM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex my-3 align-items-center">
+        <label class="lable_theme" for="">Duration</label>
+        <div class=" Duration_part align-items-center gap">
+          <div class="d-flex">
+            <select name="" id="" class=" input_theme">
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+            </select>
+            <p class="m-0 p_text">hr</p>
+          </div>
+          <div class="d-flex">
+            <select name="" id="" class=" input_theme">
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+            </select>
+            <p class="m-0 p_text">min</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex my-3 align-items-center">
+        <label class="lable_theme_two" for="">TIme Zone</label>
+        <input type="time" style="width: 100%;">
+      </div>
+      <div class="d-flex my-3 align-items-center">
+        <label class="lable_theme" for="">Subject</label>
+        <div class=" Duration_part align-items-center gap">
+          <div class="d-flex">
+            <select name="" id="" class=" input_theme">
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+            </select>
+            <p class="m-0 p_text">Teacher</p>
+          </div>
+          <div class="d-flex">
+            <select name="" id="" class=" input_theme">
+              <option value="">1</option>
+              <option value="">1</option>
+              <option value="">1</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary pull-right close" (click)="close()">
+        Save
+      </button>
+    </div>
+  
+  </ng-template>

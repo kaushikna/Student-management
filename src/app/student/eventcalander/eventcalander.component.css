@@ -1,0 +1,134 @@
+/* .modal_box{
+    padding: 20px;
+}
+.textarea_theme{
+    height: 50px;
+}
+.input_theme{
+    height: 35px;
+    width: 165px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+.p_text{
+    padding-left: 30px;
+}
+.lable_theme{
+    width: 200px;
+}
+.lable_theme_two{
+    width: 275px;
+}
+.gap{
+    gap: 30px;
+}
+.modal_box input{
+    border-radius: 6px;
+    text-indent: 5px;
+    border: 1px solid rgb(116, 115, 115);
+    height: 35px;
+}
+.modal_box select{
+    text-indent: 5px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid rgb(116, 115, 115);
+    height: 35px;
+}
+.modal_box textarea{
+    text-indent: 5px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid rgb(116, 115, 115);
+    height: 80px;
+}
+.wen_part{
+    display: flex;
+}
+.Duration_part{
+    display: flex;
+}
+.subject_part{
+    display: flex;
+}
+@media(max-width:1024px){
+    .wen_part{
+        display: block !important;
+    }
+    .modal_box input{
+        margin: 6px 0px;
+    }
+    .Duration_part{
+        display: block !important;
+    }
+    .modal_box select{
+        margin: 6px 0px;
+    }
+    .subject_part{
+        display: block !important;
+    }
+    .modal_box textarea{
+        margin: 6px 0px;
+    }
+    .p_text{
+        padding-left: 8px;
+    }
+} */
+
+
+::ng-deep .fc-row.fc-week.fc-widget-content{
+    height: 100px !important;
+    background-color: #fff !important;
+}
+::ng-deep .fc-scroller.fc-day-grid-container{
+    height: max-content !important;
+}
+::ng-deep .fc-day-grid-event .fc-content{
+    white-space: unset !important;
+    color: #fff;
+    text-align: center !important;
+}
+::ng-deep th.fc-day-header.fc-widget-header{
+    background-color: #007bff !important;
+    font-weight: 500;
+    color: #fff !important;
+}
+::ng-deep a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable{
+    background-color: #007bff;
+    border: none;
+    padding: 6px;
+}
+::ng-deep span.fc-time{
+    display: none !important;
+}
+::ng-deep td.fc-day-top.fc-wed.fc-past{
+    padding: 6px !important;
+}
+::ng-deep button.fc-prev-button{
+    background-color: #007bff;
+    background-image: none;
+}
+::ng-deep button.fc-next-button{
+    background-color: #007bff;
+    background-image: none;
+}
+::ng-deep button.fc-today-button:disabled{
+    background-color: #7cb6f4;
+}
+::ng-deep button.fc-button{
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 400;
+}
+::ng-deep button.fc-button:focus{
+    background-color: #005cbf;
+    font-weight: 400;
+}
+::ng-deep .fc-state-default{
+    background-image: none;
+}
+::ng-deep .fc-unthemed td.fc-today{
+    background-color: #e5f2ff;
+}
+

@@ -1,0 +1,28 @@
+.modal-header{
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+}
+.modal-header h4{
+    font-size: 25px;
+    font-weight: 600;
+    color: #f6b024;
+}
+.modal-header button{
+    color: black;
+    opacity: 1;
+}
+.modal-body,.modal-footer{
+    background-color: white;
+    padding: 0;
+}
+.modal-footer{
+    padding: 15px;
+}
+.modal-footer button{
+    padding: 7px 15px;
+    width: 100px;
+    height: 39px;
+}
+::ng-deep .modal-content{
+    border: 0;
+}

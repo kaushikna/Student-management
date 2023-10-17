@@ -1,0 +1,326 @@
+<div class="content-wrapper">
+
+    <div class="resource-library-details">
+
+        <div class="row mb-3">
+
+            <div class="col-md-12">
+                <h3 class="page-title"><a routerLink="/admin/resource-library" class="text-dark cp">Resource Library</a>
+                    <small class="pl-2 pr-2 ft-12">>></small> <small>Chapters</small>
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="white-tile">
+                    <div class="row border-bottom pb-2 white-tile-head">
+                        <div class="col-8">
+                            <h4>{{model.subject}}</h4>
+                        </div>
+                        <div class="col-4 ft-12 text-right text-dark">{{model.entityType}}</div>
+                    </div>
+
+                    <div class="white-tile-body">
+                        <h5 class="ft-15">{{model.title}}</h5>
+
+                        <div class="row">
+                            <div class="col-12">
+
+                                <ul class="nav nav-tabs tab-transparent" id="myTab" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview"
+                                            role="tab" aria-controls="overview" aria-selected="false">Overview</a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" id="syllabus-tab" data-toggle="tab" href="#syllabus"
+                                            role="tab" aria-controls="syllabus" aria-selected="false">Syllabus</a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" id="chapters-tab" data-toggle="tab" href="#chapters"
+                                            role="tab" aria-controls="chapters" aria-selected="false">Chapters</a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" id="quiz-tab" data-toggle="tab" href="#quiz" role="tab"
+                                            aria-controls="quiz" aria-selected="false">Quiz</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="overview" role="tabpanel"
+                                        aria-labelledby="overview-tab">
+
+                                        <h5>Course Overview</h5>
+                                        <p *ngIf="model.overview" [innerHTML]="model.overview">
+                                        </p>
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="syllabus" role="tabpanel"
+                                        aria-labelledby="syllabus-tab">
+                                        <h5>Syllabus</h5>
+                                        <p [innerHTML]="model.syllabus">
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="chapters" role="tabpanel"
+                                        aria-labelledby="chapters-tab">
+
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <p>{{model.chapters?.length}} Chapters</p>
+                                            </div>
+
+                                            <div class="col-6 text-right">
+                                                <button (click)="openAddChapter()" *ngIf="addChapterButton"
+                                                    class="btn btn-primary btn-sm">Add
+                                                    Chapter</button>
+                                            </div>
+                                        </div>
+
+                                        <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+                                            <ngb-panel *ngFor="let chapter of model.chapters;let i = index"
+                                                [id]="'chapter-'+ i">
+                                                <ng-template ngbPanelHeader>
+                                                    <div class="d-flex white-tile-body action "
+                                                        (click)="acc.toggle('chapter-'+ i);getLessons(chapter,i)"
+                                                        ngbPanelToggle>
+                                                        <button *ngIf="chapter.edit" class=" icon-card btn btn-sm btn-light"
+                                                            (click)="openEditChapter($event,chapter)"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                        <button *ngIf="chapter.delete" class="icon-card btn btn-sm btn-light"
+                                                            (click)="openDeleteItem($event,chapter,'chapter')"><i
+                                                                class="fa fa-trash"></i></button>
+                                                        <h5 class="mt-2"><button class="m-0 btn btn-sm btn-link card-text-title ">Ch
+                                                                {{i+1}}. {{chapter.title}}</button></h5>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template ngbPanelContent>
+                                                    <div class="semi-header">
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-md-2">Course Progress</div>
+                                                            <div class="col-md-2">Best Score</div>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="lesson-list">
+                                                        <li *ngFor="let lesson of chapter.lessons;let k = index">
+                                                            <button class="btn btn-sm btn-light"
+                                                                (click)="openEditLesson($event,chapter,lesson)"
+                                                                *ngIf="lesson.edit"><i
+                                                                    class="fa fa-pencil"></i></button>
+                                                            <button *ngIf="lesson.delete"
+                                                                class="btn btn-sm btn-light ml-2 mr-2"
+                                                                (click)="openDeleteItem($event,lesson,'lesson')"><i
+                                                                    class="fa fa-trash"></i></button><a
+                                                                class="text-primary lesson"
+                                                                (click)="onViewLesson(i,k)">Lesson-{{k+1}}:
+                                                                {{lesson.title}}</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="lesson-list pt-0">
+                                                        <li>
+                                                            <button class="btn btn-sm btn-primary mt-2"
+                                                                *ngIf="addLessonButton"
+                                                                style="width: 100px;"
+                                                                (click)="openAddLesson(chapter)">Add Lesson</button>
+                                                        </li>
+
+                                                    </ul>
+                                                </ng-template>
+                                            </ngb-panel>
+
+
+                                        </ngb-accordion>
+                                    </div>
+                                    <div class="tab-pane fade" id="quiz" role="tabpanel" aria-labelledby="quiz-tab">
+
+                                        <app-quiz-list *ngIf="model?._id" [modelId]="model._id"
+                                            [subjectId]="model.subjectId"
+                                            [addQuizButton]="addQuizButton"></app-quiz-list>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+<app-smart-modal2 #modal2 [modalConfig]="addChapterConfig">
+    <form (submit)="addChapter()">
+        <div class="row mb-3 mx-0 mt-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Title<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="chapterModel.title" name="Chapter Title"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0">
+            <div class="col-md-12 justify-content-end d-flex">
+                <button type="submit" style="width: 100px;" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+<app-smart-modal2 #modal3 [modalConfig]="editChapterConfig">
+    <form (submit)="editChapter()">
+        <div class="row mb-3 mx-0 mt-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Title<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="chapterModel.title" name="Chapter Title"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" style="width: 100px;" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+<app-smart-modal2 #modal4 [modalConfig]="addLessonConfig">
+    <form (submit)="addLesson()">
+        <div class="row mb-3 mx-0 mt-3 px-1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Lesson Title<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="lessonModel.title" name="Lesson Title"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Video URL<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="lessonModel.video" name="Lesson Video"
+                        class="form-control form-control">
+                </div>
+            </div>
+            <div class="col-md-6 mx-0 px-1">
+                <div class="form-group">
+                    <label>PDF<span class="text-danger">*</span></label>
+                    <div class="upload-file-container">
+                        <input type="text" name="Lesson File" [(ngModel)]="lessonModel.file" class="form-control"
+                            disabled>
+                        <button type="button" class="btn btn-light btn-sm" (click)="onFileButtonClick()"> <i
+                                class="fa fa-spinner fa-spin" *ngIf="uploading"></i> Upload</button>
+
+                    </div>
+                    <input class="resourceFile" type="file" #resourceFileInput name="resourceFile"
+                        accept="application/pdf" (change)="uploadFile($event)">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Description<span class="text-danger">*</span></label>
+                    <angular-editor [placeholder]="'Enter text here...'" name="Lesson Description"
+                        [(ngModel)]="lessonModel.description"></angular-editor>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" [disabled]="uploading" style="width:100px;" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+<app-smart-modal2 #modal5 [modalConfig]="editLessonConfig">
+    <form (submit)="editLesson()">
+        <div class="row mb-3 mx-0 px-1 mt-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Lesson Title<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="lessonModel.title" name="Lesson Title"
+                        class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Video URL<span class="text-danger">*</span></label>
+                    <input type="text" [(ngModel)]="lessonModel.video" name="Lesson Video"
+                        class="form-control form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>PDF<span class="text-danger">*</span></label>
+                    <div class="upload-file-container">
+                        <input type="text" name="Lesson File" [(ngModel)]="lessonModel.file" class="form-control"
+                            disabled>
+                        <button type="button" class="btn btn-light btn-sm" (click)="onFileButtonClick()"><i
+                                class="fa fa-spinner fa-spin" *ngIf="uploading"></i> Upload</button>
+
+                    </div>
+                    <input class="resourceFile" type="file" #resourceFileInput name="resourceFile"
+                        accept="application/pdf" (change)="uploadFile($event)">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Description<span class="text-danger">*</span></label>
+                    <angular-editor [placeholder]="'Enter text here...'" name="Lesson Description"
+                        [(ngModel)]="lessonModel.description"></angular-editor>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mx-0 px-1">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" [disabled]="uploading" style="width: 100px;" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+
+
+</app-smart-modal2>
+<!-- Modal HTML -->
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column bg-white">
+                <div class="icon-box">
+                    <i class="mdi mdi mdi-close"></i>
+                </div>
+                <h4 class="modal-title w-100">Delete Item?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure that you want to permanently delete the selected record?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" (click)="onDeleteCancel()">No</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteConfirm()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

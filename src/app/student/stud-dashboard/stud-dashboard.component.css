@@ -1,0 +1,76 @@
+.create-card{
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    height: 100%;
+}
+
+.heading h3{
+    color: #f6b024;
+    font-weight: 600;
+}
+.lable_theme{
+    font-weight: 500;
+    font-size: 12px;
+}
+#canvas1{
+    height: 362px !important;
+}   
+.select{
+    display: flex;
+    gap: 20px;
+}
+.part_one{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.clearfix{
+    border-radius: 10px;
+    /* padding: 20px; */
+    justify-content: space-between;
+}
+.chat_one{
+    width: 100%;
+}
+.chart_two{
+    gap: 20px;
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media(max-width:992px){
+    .chart_two{
+        display: block !important;
+    }
+    .chart_three{
+        display: block !important;
+    }
+}
+.chart_three{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chart_box{
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+}
+.chart_three{
+    padding: 20px 10px;
+    gap: 20px;
+}
+.chart_two .col-6{
+    max-width: 49% !important;
+} 
+.chart_three .col-6{
+    max-width: 49% !important;
+}
+.chat_four{
+    margin-top: 10px;
+}

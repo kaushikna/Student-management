@@ -1,0 +1,152 @@
+::ng-deep #paginationListId .ngx-pagination li{
+    border-radius: 50px;
+}
+::ng-deep #paginationListId .ngx-pagination li.current{
+    background-color: #0880e8;
+}
+::ng-deep #paginationListId .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.events-table{
+    background-color: #fff !important;
+}
+.table-bordered td, .table-bordered th{
+    border: 0;
+}
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: white;
+}
+.table-bordered{
+  
+  font-family: 'Nunito Sans', sans-serif;
+  border: 0 !important;
+
+}
+.stretch-card{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 0;
+}
+.page-title{
+    padding: 15px;
+    font-weight: 600;
+    font-size: 19.3px;
+    border-radius: 10px 10px 0 0;
+    background-color: white;
+    color: #f6b024;
+}
+.table-bordered tr td, .table-bordered thead{
+    border-bottom: 1px solid rgb(227, 227, 227);
+}
+.heading{
+    font-size: 21px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+::ng-deep .table-bordered thead th{
+    background-color: #fff;
+    color: #8898aa;
+    font-size: 11.7px !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.table-bordered thead{
+    border-top: 1px solid rgb(227, 227, 227);
+}
+.events-table td{
+    font-size: 14px; 
+    font-weight: 500;
+}
+.table-bordered thead th{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+/* modal */
+.modal-content{
+    border-radius: 10px;
+    border: 0;
+    background-color: transparent;
+}
+.modal-content form{
+    background-color: transparent;
+}
+.modal-body{
+    padding: 20px 20px !important;
+}
+.modal-header{
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+    border: 0;
+}
+.modal-header h5{
+    font-size: 23px;
+    font-weight: 600;
+    color: #f6b024;
+    padding: 5px 0;
+}
+.modal-header button{
+    color: white;
+    opacity: 1;
+}
+.modal-body,.modal-footer{
+    background-color: white;
+    padding: 0;
+}
+.modal-footer{
+    padding: 15px;
+    border: 0;
+}
+.modal-footer button{
+    margin: 0;
+    width: 118px;
+}
+.modal-dialog .close{
+    color: black;
+}
+select,textarea,input{
+    font-size: 15px;
+}
+.modal-body .form-group .col-form-label{
+    color:black;
+    font-size: 16px;
+    font-weight: 500;
+}
+.modal-body .info-sec .i{
+    height: 22px;
+    width: 26px;
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #007bff;
+    border-radius: 50px;
+}
+.modal-body .info-sec span{
+    font-size: 15px;
+    color: rgb(69, 69, 69);
+}
+.modal-body .semi-title{
+    color: #4a4a4a;
+}
+.profile-pic {
+    width: 75px !important;
+    height: 75px !important;
+    margin: auto;
+}
+.profile-pic img {
+    width: 80% !important;
+    height: 80% !important;
+    margin: auto;
+}
+.teachername{
+    cursor: pointer;
+}

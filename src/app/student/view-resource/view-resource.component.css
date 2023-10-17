@@ -1,0 +1,85 @@
+.resourceFile{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+.upload-file-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.upload-file-container button{
+    position: absolute;
+    right: 10px;
+}
+.white-tile{
+    box-shadow: 0px 0px 14px -1px rgba(67, 67, 67, 0.35);
+    border:0
+}
+
+::ng-deep #paginationListId .ngx-pagination li{
+    border-radius: 50px;
+}
+::ng-deep #paginationListId .ngx-pagination li.current{
+    background-color: #0880e8;
+}
+::ng-deep #paginationListId .ngx-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+::ng-deep .card .card-header{
+    background-color: #0880e8 !important;
+    color: #fff !important;
+}
+::ng-deep .card .card-header .card-text-title{
+    color: white;
+    font-weight: 600;
+}
+::ng-deep .card .card-header .icon-card{
+    background-color: transparent;
+    border: 0;
+    color: white;
+}
+::ng-deep .card .card-body{
+    padding: 0 !important;
+}
+::ng-deep .card .lesson-list{
+    padding: 20px;
+}
+::ng-deep .card .semi-header{
+    padding: 5px 15px;
+    background-color: #cccccc;
+    color: #949391;
+    font-size: 15px;
+    font-weight: 600;
+}
+#myTab {margin-top: 20px;}
+#myTab li a{
+    padding: 7px 15px;
+    font-weight: 600;
+}
+#myTab li a.active{
+    background-color: #f6b024;
+    color: white;
+    border-radius: 7px 7px 0 0;
+}
+#myTab li a.active::after{
+    content: unset !important;
+}
+#myTabContent{
+    height: calc(100vh - 373px);
+    overflow-y: auto;
+}
+#myTabContent::-webkit-scrollbar {
+    width: 8px;
+}
+#myTabContent::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+#myTabContent::-webkit-scrollbar-thumb {
+    background: rgb(190, 190, 190); 
+    border-radius: 10px;
+}
+.lesson{
+    cursor: pointer;
+}

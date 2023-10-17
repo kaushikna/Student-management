@@ -1,0 +1,126 @@
+<div class="content-wrapper">
+  <h1 class="page-title mb-4">{{ test.name }}</h1>
+
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+
+          <div id="test">
+            <div *ngIf="mode == 'test' && test">
+              <div *ngFor="
+        let question of filteredQuestions
+          | paginate: { itemsPerPage: 1, currentPage: p }
+          
+      ">  
+      <pagination-controls class="hello" (pageChange)="p = $event"></pagination-controls>
+      
+      <div class="badge space-10 mr-2"><img src="../../../assets/images/logo_testpaper.png" class="img-fluid"/></div>
+                <div class="badge badge-light space-10 mr-2">Subject : {{question.subjectId.name}}</div>
+                <div class="badge badge-light space-10 mr-2">SubCategory :{{question.subCat}}</div>
+                <div class="badge badge-light space-10 mr-2">
+                  Question {{ pager.index + 1 }} of {{ pager.count }}.
+                </div>
+                <ng-container *ngIf="!preview">
+                  <button (click)="pauseTimer()" class="badge badge-danger space-10 float-right" style="margin: 5px">
+                    {{paused}}
+                  </button>
+                  <button (click)="endTimer()" class="badge badge-success space-10 float-right" style="margin: 5px">
+                    End Session
+                  </button>
+                  <div *ngIf="config.duration" class="badge badge-light space-10 float-right" style="margin: 5px">
+                    Time: {{ ellapsedTime }} / {{ duration }}
+                  </div>
+                </ng-container>
+              
+
+                <hr>
+                <div *ngIf="question.questionTypeId=='1'">
+                  <img [src]="question.image" height="200">
+                  <br />
+                </div>
+                <div class="row text-left options">
+                    <div class="col-sm border-right" *ngIf="question.type">
+                        <h6 class="card-title">{{ question.passage.title }}</h6>
+                        <div style="height: auto">
+                          <div class="question" [innerHTML]="question.passage.passageText"></div>
+                        </div>
+                      </div>
+                      <div class="col-sm">
+                          <h6 class="card-title">
+                              <!-- {{ pager.index + 1 }}. -->
+                              Q.
+                              <span [innerHTML]="question.name"></span>
+            
+                            </h6>
+                        <div class="row">
+                            <div class="col-12" *ngFor="let option of question.options;let i = index">
+                                <div class="option">
+                                  <label class="font-weight-normal" [attr.for]="option.id">
+                                    <input *ngIf="question.optionsType ===0" [id]="option.id" type="radio" [(ngModel)]="option.selected" value="{{i}}" name="{{question.id}}" (change)="onSelect(question, option)" /> 
+                                    <input *ngIf="question.optionsType ===1" type="checkbox" name="{{question.id}}" [(ngModel)]="option.selected" (change)="onSelect(question, option)" /> {{ option.name }}
+                                    <div *ngIf="option.entryType=='1'">
+                                      <img [src]="option.image" height="100">
+                                      <br />
+                                    </div>
+                                  </label>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                </div>
+              </div>
+              <hr />
+              <div class="text-center">
+                <!-- <button
+        class="btn btn-default"
+        *ngIf="config.allowBack"
+        (click)="goTo(0)"
+      >
+        First
+      </button>
+      <button
+        class="btn btn-default"
+        *ngIf="config.allowBack"
+        (click)="goTo(pager.index - 1)"
+      >
+        Prev
+      </button>
+      <button class="btn btn-primary" (click)="goTo(pager.index + 1)">
+        Next
+      </button>
+      <button
+        class="btn btn-default"
+        *ngIf="config.allowBack"
+        (click)="goTo(pager.count - 1)"
+      >
+        Last
+      </button> -->
+                <button class="btn btn-primary" *ngIf="p==questionArr.length" (click)="endTimer()">{{submitButtonText}}</button>
+
+                <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+              </div>
+            </div>
+            <div *ngIf="mode == 'result'">
+              <!-- <p style="margin-left:50px">result : {{ finalResult | json }}</p> -->
+              <div class="row" style="margin-left:50px">total Marks :{{ TotalMarksObtained }} | {{ TotalMarks }} </div>
+              <br>
+              <hr>
+              <div *ngFor="let sub of finalResult" style="margin-left:50px">
+                <div class="row">name : {{sub.name}} </div>
+                <hr>
+                <div class="row">Total Marks : {{sub.total}} </div>
+                <div class="row">Correct Marks : {{sub.correctMarks}} </div>
+                <div class="row">Total Questions : {{sub.totalQuestion}} </div>
+                <div class="row">Correct Questions : {{sub.correctQuestion}} </div>
+                <hr>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
